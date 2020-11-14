@@ -1,45 +1,49 @@
 from requests import Session
 from bs4 import BeautifulSoup
 
-url = 'https://www.belezanaweb.com.br'
-first_call = '/api/htmls/showcase?uri=/cabelos/shampoo&size=36&pagina=1'
+class BelezaNaWebRequestItens:
+    url = 'https://www.belezanaweb.com.br'
+    first_parameters = '&size=36&pagina=1'
 
-def get_next_url(page_source):
-    """
-    Return "Add to watch list" button url.
-    """
-    soup = BeautifulSoup(page_source, 'html.parser')
-    for button in soup.find_all("button", class_='lazyload'):
-        return button.get('data-ajax')
+    def __init__(self, subitem, link):
+        self.subitem = subitem
+        self.link = link
+        
 
-def get_list_url(page_source):
-    """
-    Return "Add to watch list" button url.
-    """
-    soup = BeautifulSoup(page_source, 'html.parser')
-    urls = []
-    for link in soup.find_all("a", class_='showcase-item-image'):
-        urls.append(link['href'])
-    
-    return urls
+    def get_next_url(self, page_source):
+        """
+        Return "Add to watch list" button url.
+        """
+        soup = BeautifulSoup(page_source, 'html.parser')
+        for button in soup.find_all("button", class_='lazyload'):
+            return button.get('data-ajax')
 
-def main():
-    with Session() as session:
-
-        response = session.get(url + first_call)  # visit item page and scrape button
+    def get_list_url(self, page_source):
+        """
+        Return "Add to watch list" button url.
+        """
+        soup = BeautifulSoup(page_source, 'html.parser')
         urls = []
-        while response.ok:
-            next_url = get_next_url(response.content)
+        for link in soup.find_all("a", class_='showcase-item-image'):
+            urls.append(link['href'])
+        
+        return urls
 
-            if next_url is None:
-                break
+    def request_itens(self):
+        with Session() as session:
 
-            urls.extend(get_list_url(response.content))
-            print('Url is:', next_url)
+            urls = []
+            response = session.get(self.url + self.link + self.first_parameters)  # visit item page and scrape button
+            while response.ok:
+                next_url = self.get_next_url(response.content)
 
-            response = session.get(url + next_url)  # add item to watch list
-            
-        print(urls)
+                if next_url is None:
+                    break
 
-if __name__ == '__main__':
-    main()
+                urls.extend(self.get_list_url(response.content))
+                #print('Url is:', next_url)
+
+                response = session.get(self.url + next_url)  # add item to watch list
+                
+            #print(f"{self.subitem} - QTDE: {len(urls)}")
+            return self.subitem, urls
