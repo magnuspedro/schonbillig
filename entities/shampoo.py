@@ -12,4 +12,5 @@ class Shampoo:
     utility: str
     size_unit: float
     hair_type: str
+    hair_shaft_condition: str
     sku: str
