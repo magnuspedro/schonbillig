@@ -1,0 +1,6 @@
+---
+belezaNaWeb:
+  url: "https://www.belezanaweb.com.br"
+  parameters:
+    size: 36
+    page: 1

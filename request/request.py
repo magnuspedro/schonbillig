@@ -25,12 +25,12 @@ class Request:
                 f'Request url must be str or unicode, got {type(url).__name__}')
         self.__url = url
 
-    def make_request(self):
+    def request(self):
 
         response = requests.request(
             self.method, self.url, headers=self.headers, cookies=self.cookies)
         logger.info(f'[{response.status_code}] --> Status Code',
-                    extra={'mdc': {'status_code': response.status_code}})
+                    extra={'mdc': {'status_code': response.status_code, 'url': self.url}})
 
         if response.status_code != 200:
             raise Exception(response.status_code)
