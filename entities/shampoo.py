@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import List
 from datetime import datetime
+from typing import List
+
 from .price import Price
 
 
