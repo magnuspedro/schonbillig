@@ -1,8 +1,5 @@
-from spyder.beleza_na_web_spyber import BelezaNaWebSpyder
+from entrypoints.command_line import main
 
-
-def main():
-    BelezaNaWebSpyder().parse()
 
 if __name__ == "__main__":
     main()
