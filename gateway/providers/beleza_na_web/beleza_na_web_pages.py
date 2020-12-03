@@ -5,7 +5,7 @@ from request.request import Request
 logger = PTLogger(name=__name__)
 
 
-class BelezaNaWeb():
+class BelezaNaWebPages():
     #logger.info(f'Getting links for requesting to {__name__}')
     def __init__(self, urls, base_url):
         self.urls = urls

@@ -1,6 +1,7 @@
 from logger.logging_module import PTLogger
 from bs4 import BeautifulSoup
 from entities.shampoo import Shampoo
+from entities.price import Price
 from entities.enum.info_line import InfoLine
 
 logger = PTLogger(name=__name__)
@@ -22,11 +23,13 @@ class GetShampooConverter:
                           brand_line=shampoo_specs.get(InfoLine.LINE.value),
                           vegan=False,
                           size=size,
-                          price=float(price),
+                          price=[Price(**{'price': float(price)})],
                           utility=shampoo_specs.get(InfoLine.UTILITY.value),
                           size_unit=shampoo_specs.get(InfoLine.SIZE.value),
-                          hair_type=shampoo_specs.get(InfoLine.HAIR_TYPE.value),
-                          hair_shaft_condition=shampoo_specs.get(InfoLine.HAIR_SHAFT_CONDITION.value),
+                          hair_type=shampoo_specs.get(
+                              InfoLine.HAIR_TYPE.value),
+                          hair_shaft_condition=shampoo_specs.get(
+                              InfoLine.HAIR_SHAFT_CONDITION.value),
                           sku=sku
                           )
         return shampoo
