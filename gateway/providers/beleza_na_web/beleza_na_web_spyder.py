@@ -4,9 +4,10 @@ from config.logger.logging_module import PTLogger
 from ..request import Request
 from ..spyder import Spyder
 from .beleza_na_web_page import BelezaNaWebPage
-from .converter.get_shampoo_converter import GetShampooConverter
-from .strategy.product_selector import ProductSelector
+from .converter.strategy.converter import Converter
+from .converter.strategy.converter_selector import ConverterSelector
 from .enum.product import Product
+from .strategy.product_selector import ProductSelector
 
 logger = PTLogger(name=__name__)
 
@@ -26,8 +27,8 @@ class BelezaNaWebSpyder(Spyder):
     def parse(self):
         for request in self.start_request():
             logger.info('Converting request')
-            # TODO: CreateStrategy to choose products
-            product = GetShampooConverter().to_entity(request)
+            product = ConverterSelector(
+                Converter.SHAMPOO.value).convert(request)
             logger.info(product)
             logger.info('Converted successfully')
             yield product

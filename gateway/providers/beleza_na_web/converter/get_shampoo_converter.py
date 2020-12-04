@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 from config.logger.logging_module import PTLogger
-from ..enum.info_line import InfoLine
 from entities.price import Price
 from entities.shampoo import Shampoo
+
+from ..enum.info_line import InfoLine
 
 logger = PTLogger(name=__name__)
 
@@ -35,6 +36,7 @@ class GetShampooConverter:
                            InfoLine.HAIR_TYPE.value),
                        hair_shaft_condition=shampoo_specs.get(
                            InfoLine.HAIR_SHAFT_CONDITION.value),
+                       url=[response.url],
                        sku=sku
                        )
 

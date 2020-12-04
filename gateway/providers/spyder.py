@@ -9,12 +9,7 @@ class Spyder:
     urls: list
 
     def start_request(self, urls=None):
-        if urls is None:
-            urls = self.urls
-        for url in urls:
-            logger.debug(f'[StartRequest]', extra={'mdc': {'url': url}})
-            yield Request(url).make_request()
+        raise NotImplementedError
 
     def parse(self):
-        raise NotImplementedError(
-            f'{self.__class__.__name__}.parse callback is not defined')
+        raise NotImplementedError

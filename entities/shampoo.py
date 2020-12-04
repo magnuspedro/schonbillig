@@ -17,5 +17,6 @@ class Shampoo:
     size_unit: float
     hair_type: str
     hair_shaft_condition: str
+    url: List[str]
     sku: str
     create_at: datetime = field(default_factory=datetime.now)
