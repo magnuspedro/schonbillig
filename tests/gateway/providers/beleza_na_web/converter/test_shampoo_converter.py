@@ -12,7 +12,7 @@ class TestShampooConverter(unittest.TestCase):
     @patch('requests.get')
     def mock_request(self, mock_get):
         with open(
-            'tests/gateway/providers/beleza_na_web/converter/beleza.html',
+            'tests/fixtures/html/beleza.html',
                 'r') as f:
 
             mock_get.return_value.text = f.read()
