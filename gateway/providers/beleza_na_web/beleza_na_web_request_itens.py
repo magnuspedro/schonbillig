@@ -33,9 +33,9 @@ class BelezaNaWebRequestItens(ItemRequest):
         while response.ok:
             next_url = self.get_next_url(response.content)
 
+            yield self.get_list_url(response.content)
+
             if next_url is None:
                 break
-
-            yield self.get_list_url(response.content)
 
             response = Request(url=self.source + next_url).request()

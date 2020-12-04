@@ -10,20 +10,8 @@ logger = PTLogger(name=__name__)
 
 class GetShampooConverter:
     def to_entity(self, response):
-        soup = BeautifulSoup(response.text, features="lxml")
-        name = soup.select(
-            '.nproduct-title')[0].text.strip().split('-')[0].strip()
-        size = response.url.split('-')[-1].strip('/')
-        sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
-        info_label = soup.select('.info-line')
-        shampoo_specs = self.specs(info_label)
-        price = soup.select('.nproduct-price-value')
-        if price:
-            price = price[0].text.strip().split(
-                '$')[1].strip().replace(',', '.')
-        else:
-            price = 'nan'
-
+        name, size, info_label, sku, shampoo_specs, price = self.get_elements(
+            response)
         return Shampoo(name=name,
                        brand=shampoo_specs.get(InfoLine.BRAND.value),
                        brand_line=shampoo_specs.get(InfoLine.LINE.value),
@@ -39,6 +27,22 @@ class GetShampooConverter:
                        url=[response.url],
                        sku=sku
                        )
+
+    def get_elements(self, response):
+        soup = BeautifulSoup(response.text, features="lxml")
+        name = soup.select(
+            '.nproduct-title')[0].text.strip().split('-')[0].strip()
+        size = response.url.split('-')[-1].strip('/')
+        sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
+        info_label = soup.select('.info-line')
+        shampoo_specs = self.specs(info_label)
+        price = soup.select('.nproduct-price-value')
+        if price:
+            price = price[0].text.strip().split(
+                '$')[1].strip().replace(',', '.')
+        else:
+            price = 'nan'
+        return name, size, info_label, sku, shampoo_specs, price
 
     def specs(self, info_label):
         shampoo_specs = {}
