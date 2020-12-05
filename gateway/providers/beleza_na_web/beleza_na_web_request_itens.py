@@ -3,6 +3,8 @@ from config.logger.logging_module import PTLogger
 
 from ..item_request import ItemRequest
 from ..request import Request
+from config.exceptions.page_not_found_exception \
+    import PageNotFoundException
 
 logger = PTLogger(name=__name__)
 
@@ -28,14 +30,25 @@ class BelezaNaWebRequestItens(ItemRequest):
 
     def request_itens(self):
         logger.info("Requesting items")
+        # try:
         response = Request(
             url=self.source + self.product + self.params).request()
-        while response.ok:
+        # except PageNotFoundException as e:
+        #     logger.info('The page was not find', extra={
+        #         'mdc': {'status_code': e.status_code, 'url': e.url}})
+        #     return
+
+        while response:
+
             next_url = self.get_next_url(response.content)
 
             yield self.get_list_url(response.content)
 
             if next_url is None:
                 break
-
+            # try:
             response = Request(url=self.source + next_url).request()
+            # except PageNotFoundException as e:
+            #     logger.info('The page was not find', extra={
+            #         'mdc': {'status_code': e.status_code, 'url': e.url}})
+            #     return

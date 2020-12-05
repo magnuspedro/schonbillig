@@ -5,4 +5,4 @@ from ..beleza_na_web.beleza_na_web_spyder import BelezaNaWebSpyder
 class BelezaNaWebStrategy(ProviderStrategy):
 
     def choose_provider(self):
-        return BelezaNaWebSpyder().parse()
+        return BelezaNaWebSpyder().start_request()

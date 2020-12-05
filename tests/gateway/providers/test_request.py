@@ -1,18 +1,29 @@
 from unittest.mock import patch
 from unittest import TestCase
 from gateway.providers.request import Request
+from config.exceptions.page_not_found_exception \
+    import PageNotFoundException
 
 
 class TestRequest(TestCase):
 
-    @patch('gateway.providers.request.requests.get')
+    @patch('gateway.providers.request.requests.request')
     def test_request(self, mock_get):
         mock_get.return_value.ok = True
         mock_get.return_value.status_code = 200
 
         response = Request('url').request()
 
+        print(response.__dict__)
+
         self.assertIsNotNone(response, 'Request cannot be null')
-        self.assertEqual(response.ok, 200, 'Request has to be successfull')
+        self.assertEqual(response.ok, True, 'Request has to be successfull')
         self.assertEqual(response.status_code, 200,
                          'Request has to be successfull')
+
+    @patch('gateway.providers.request.requests.request')
+    def test_request_fail(self, mock_get):
+        mock_get.return_value.ok = False
+        mock_get.return_value.status_code = 404
+
+        self.assertRaises(PageNotFoundException, Request('url').request)

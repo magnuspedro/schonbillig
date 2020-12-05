@@ -7,11 +7,12 @@ class BelezaProduct:
     @staticmethod
     def insert_product(dataclass):
         product_dict = asdict(dataclass)
-        product = db.find_one({'sku': product_dict['sku']})
+        find_query = {'code.code': product_dict['code'][0]['code']}
+
+        product = db.find_one(find_query)
         if not product:
             db.insert_one(asdict(dataclass))
         else:
-            db.update_one({'sku': product_dict['sku']}, {
-                          '$push': {'price': product_dict['price'][0]}})
+            db.update_one(find_query,
+                          {'$push': {'price': product_dict['price'][0]}})
 
-        print(product)

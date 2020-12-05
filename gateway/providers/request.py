@@ -1,5 +1,6 @@
 import requests
 from config.logger.logging_module import PTLogger
+from config.exceptions.page_not_found_exception import PageNotFoundException
 
 logger = PTLogger(name=__name__)
 
@@ -29,10 +30,12 @@ class Request:
         response = requests.request(
             self.method, self.url, headers=self.headers, cookies=self.cookies)
         logger.info(f'[{response.status_code}] --> Status Code',
-                    extra={'mdc': {'status_code': response.status_code, 'url': self.url}})
+                    extra={'mdc': {'status_code': response.status_code,
+                                   'url': self.url}})
 
         if response.status_code != 200:
-            raise Exception(response.status_code)
+            raise PageNotFoundException(
+                url=response.url, status_code=response.status_code)
 
         logger.debug('Setting response body')
 
