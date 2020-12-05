@@ -4,6 +4,8 @@ from enum import Enum
 class Config(Enum):
     BELEZA_PARAMAS = '&size=36&pagina=1'
     BELEZA_BASE_URL = 'https://www.belezanaweb.com.br'
+    REQUEST_RETRY = 10
+    WAITING_TIME = 2
     BELEZA_URLS = {
         'shampoo': '/api/htmls/showcase?uri=/cabelos/shampoo',
         'KitsTratamento': '/api/htmls/showcase?uri=/cabelos/kits-de-tratamento',

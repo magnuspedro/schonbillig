@@ -10,6 +10,7 @@ python-json-logger = "*"
 lxml = "*"
 pymongo = "*"
 url-parser = "*"
+tenacity = "*"
 
 [dev-packages]
 

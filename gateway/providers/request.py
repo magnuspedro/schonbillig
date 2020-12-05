@@ -1,13 +1,16 @@
 import requests
 from config.logger.logging_module import PTLogger
 from config.exceptions.page_not_found_exception import PageNotFoundException
+from tenacity import retry, stop_after_attempt, wait_fixed
+from config.config import Config
 
 logger = PTLogger(name=__name__)
 
 
 class Request:
 
-    def __init__(self, url, method='GET', headers=None, body=None, cookies=None):
+    def __init__(self, url, method='GET', headers=None,
+                 body=None, cookies=None):
         self.method = method.upper()
         self.url = url
         self.body = body
@@ -25,6 +28,8 @@ class Request:
                 f'Request url must be str or unicode, got {type(url).__name__}')
         self.__url = url
 
+    @retry(stop=stop_after_attempt(Config.REQUEST_RETRY.value),
+           wait=wait_fixed(Config.WAITING_TIME.value))
     def request(self):
 
         response = requests.request(
