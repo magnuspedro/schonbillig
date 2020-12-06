@@ -7,7 +7,7 @@ from config.exceptions.page_not_found_exception import PageNotFoundException
 
 class TestBelezaNaWebSpyder(unittest.TestCase):
 
-    @patch('gateway.providers.beleza_na_web.beleza_na_web_spyder.BelezaNaWebPage')
+    @patch('gateway.providers.beleza_na_web.beleza_na_web_spyder')
     def test_fail_product(self, mock_exception):
         mock_exception.side_effect = PageNotFoundException(
             url='url', status_code=404)
