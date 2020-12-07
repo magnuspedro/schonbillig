@@ -22,16 +22,17 @@ class BelezaNaWebSpyder(Spyder):
         for requests in BelezaNaWebRequestItens(
                 params=Config.BELEZA_PARAMAS.value,
                 product=product, source=self.source,).request_itens():
-            for request in requests:
-                try:
+            yield from self.request_prodcut(requests)
 
-                    response = Request(self.source+request).request()
+    def request_prodcut(self, requests):
+        for request in requests:
+            try:
+                response = Request(self.source+request).request()
 
-                except PageNotFoundException as e:
+            except PageNotFoundException as e:
 
-                    logger.info('The page was not find', extra={
-                        'mdc': {'status_code': e.status_code, 'url': e.url}})
-                    continue
-
-                if response.ok:
-                    yield response
+                logger.info('The page was not find', extra={
+                    'mdc': {'status_code': e.status_code, 'url': e.url}})
+                continue
+            if response.ok:
+                yield response
