@@ -21,7 +21,6 @@ class GetShampoo:
                 Provider.BELEZA_NA_WEB.value).parse():
 
             logger.info('Converting request')
-
             if(product):
                 product = ConverterSelector(
                     Converter.SHAMPOO.value).convert(product)

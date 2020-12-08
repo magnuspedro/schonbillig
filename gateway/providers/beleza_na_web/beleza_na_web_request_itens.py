@@ -30,13 +30,14 @@ class BelezaNaWebRequestItens(ItemRequest):
 
     def request_itens(self):
         logger.info("Requesting items")
-        # try:
-        response = Request(
-            url=self.source + self.product + self.params).request()
-        # except PageNotFoundException as e:
-        #     logger.info('The page was not find', extra={
-        #         'mdc': {'status_code': e.status_code, 'url': e.url}})
-        #     return
+        try:
+            response = Request(
+                url=self.source + self.product + self.params).request()
+        except PageNotFoundException as e:
+            logger.info('The page was not find', extra={
+                'mdc': {'status_code': e.status_code, 'url': e.url}})
+            response = None
+            yield
 
         while response:
 
@@ -46,9 +47,9 @@ class BelezaNaWebRequestItens(ItemRequest):
 
             if next_url is None:
                 break
-            # try:
-            response = Request(url=self.source + next_url).request()
-            # except PageNotFoundException as e:
-            #     logger.info('The page was not find', extra={
-            #         'mdc': {'status_code': e.status_code, 'url': e.url}})
-            #     return
+            try:
+                response = Request(url=self.source + next_url).request()
+            except PageNotFoundException as e:
+                logger.info('The page was not find', extra={
+                    'mdc': {'status_code': e.status_code, 'url': e.url}})
+                break

@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
 
 from config.exceptions.page_not_found_exception import PageNotFoundException
 from gateway.providers.beleza_na_web.beleza_na_web_spyder import \

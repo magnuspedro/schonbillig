@@ -9,10 +9,10 @@ class BelezaProduct:
         product_dict = asdict(dataclass)
         find_query = {'code.code': product_dict['code'][0]['code']}
 
-        product = db.find_one(find_query)
+        product = db.shampoo.find_one(find_query)
         if not product:
-            db.insert_one(asdict(dataclass))
+            db.shampoo.insert_one(asdict(dataclass))
         else:
-            db.update_one(find_query,
-                          {'$push': {'price': product_dict['price'][0]}})
-
+            db.shampoo.update_one(find_query,
+                                  {'$push':
+                                   {'price': product_dict['price'][0]}})
