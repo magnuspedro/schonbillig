@@ -1,5 +1,6 @@
 from enum import Enum
-from ..strategy.shampoo_strategy import ShampooStrategy
+from gateway.providers.beleza_na_web.strategy.shampoo_strategy \
+    import ShampooStrategy
 
 
 class Product(Enum):

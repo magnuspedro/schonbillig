@@ -1,3 +1,5 @@
+import pipey
+
 from config.exceptions.page_not_found_exception import PageNotFoundException
 from config.logger.logging_module import PTLogger
 from gateway.database.beleza_product import BelezaProduct
@@ -20,11 +22,11 @@ class GetShampoo:
 
             logger.info('Converting request')
 
-            product = ConverterSelector(
-                Converter.SHAMPOO.value).convert(product)
-
-            logger.info(product)
-
-            logger.info('Converted successfully')
-
-            BelezaProduct.insert_product(product)
+            if(product):
+                product = ConverterSelector(
+                    Converter.SHAMPOO.value).convert(product)
+                logger.info(product)
+                logger.info('Converted successfully')
+                BelezaProduct.insert_product(product)
+            else:
+                logger.info('Error retriving product, going to the next one')

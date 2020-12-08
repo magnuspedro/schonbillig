@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from config.logger.logging_module import PTLogger
 
-from ..item_request import ItemRequest
-from ..request import Request
+from gateway.providers.item_request import ItemRequest
+from gateway.providers.request import Request
 from config.exceptions.page_not_found_exception \
     import PageNotFoundException
 
