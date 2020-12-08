@@ -9,8 +9,8 @@ logger = PTLogger(name=__name__)
 
 class Request:
 
-    def __init__(self, url, method='GET', headers=None,
-                 body=None, cookies=None):
+    def __init__(self, url: str, method: str = 'GET', headers: str = None,
+                 body: str = None, cookies: str = None):
         self.method = method.upper()
         self.url = url
         self.body = body
@@ -18,19 +18,19 @@ class Request:
         self.headers = headers or {}
 
     @property
-    def url(self):
+    def url(self) -> str:
         return self.__url
 
     @url.setter
-    def url(self, url):
+    def url(self, url: str) -> str:
         if not isinstance(url, str):
             raise TypeError(
-                f'Request url must be str or unicode, got {type(url).__name__}')
+                f'Url must be str or unicode, got {type(url).__name__}')
         self.__url = url
 
     @retry(stop=stop_after_attempt(Config.REQUEST_RETRY.value),
            wait=wait_fixed(Config.WAITING_TIME.value))
-    def request(self):
+    def request(self) -> requests.Response:
 
         response = requests.request(
             self.method, self.url, headers=self.headers, cookies=self.cookies)

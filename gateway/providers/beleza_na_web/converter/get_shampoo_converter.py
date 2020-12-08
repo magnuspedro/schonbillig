@@ -1,18 +1,18 @@
 from bs4 import BeautifulSoup
 from config.logger.logging_module import PTLogger
-from entities.price import Price
 from entities.code import Code
-from entities.url import Url
+from entities.price import Price
 from entities.shampoo import Shampoo
+from entities.url import Url
+from gateway.providers.beleza_na_web.enum.info_line import InfoLine
+from requests import Response
 from url_parser import get_url
-
-from ..enum.info_line import InfoLine
 
 logger = PTLogger(name=__name__)
 
 
 class GetShampooConverter:
-    def to_entity(self, response):
+    def to_entity(self, response: Response) -> Shampoo:
         source = get_url(response.url).domain
 
         name, size, info_label, sku, shampoo_specs, price = self.get_elements(
@@ -31,11 +31,11 @@ class GetShampooConverter:
                            InfoLine.HAIR_TYPE.value),
                        hair_shaft_condition=shampoo_specs.get(
                            InfoLine.HAIR_SHAFT_CONDITION.value),
-                       url=[{'string': response.url, 'source': source}],
-                       code=[{'code': sku, 'source': source}]
+                       url=[Url(**{'string': response.url, 'source': source})],
+                       code=[Code(**{'code': sku, 'source': source})]
                        )
 
-    def get_elements(self, response):
+    def get_elements(self, response: Response) -> list:
         soup = BeautifulSoup(response.text, features="lxml")
 
         name = soup.select(
@@ -52,7 +52,7 @@ class GetShampooConverter:
             price = 'nan'
         return name, size, info_label, sku, shampoo_specs, price
 
-    def specs(self, info_label):
+    def specs(self, info_label: str) -> dict:
         shampoo_specs = {}
         for info in info_label:
             spec = ''

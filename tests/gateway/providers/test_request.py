@@ -3,6 +3,7 @@ from unittest import TestCase
 from gateway.providers.request import Request
 from config.exceptions.page_not_found_exception \
     import PageNotFoundException
+from tenacity import RetryError
 
 
 class TestRequest(TestCase):
@@ -23,7 +24,9 @@ class TestRequest(TestCase):
 
     @patch('gateway.providers.request.requests.request')
     def test_request_fail(self, mock_get):
+        request = Request('url')
+        request.request.retry.wait = None
         mock_get.return_value.ok = False
         mock_get.return_value.status_code = 404
 
-        self.assertRaises(PageNotFoundException, Request('url').request)
+        self.assertRaises(RetryError, request.request)

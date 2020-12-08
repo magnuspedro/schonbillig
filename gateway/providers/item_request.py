@@ -14,19 +14,22 @@ class ItemRequest(metaclass=ABCMeta):
                 NotImplemented)
 
     @abstractmethod
-    def get_next_url(self, page_source):
+    def get_next_url(self, page_source: str) -> str:
         """
         Return "Add to watch list" button url.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def get_list_url(self, page_source):
+    def get_list_url(self, page_source: str) -> list:
         """
         Return "Add to watch list" button url.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def request_itens(self):
+    def request_itens(self) -> list:
+        """
+        Request page intens and return.
+        """
         raise NotImplementedError

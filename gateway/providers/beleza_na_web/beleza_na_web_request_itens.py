@@ -11,24 +11,24 @@ logger = PTLogger(name=__name__)
 
 class BelezaNaWebRequestItens(ItemRequest):
 
-    def __init__(self, source, params, product):
+    def __init__(self, source: str, params: str, product: str):
         self.source = source
         self.params = params
         self.product = product
 
-    def get_next_url(self, source_page):
+    def get_next_url(self, source_page: str) -> str:
         soup = BeautifulSoup(source_page, 'html.parser')
         for button in soup.find_all("button", class_='lazyload'):
             return button.get('data-ajax')
 
-    def get_list_url(self, source_page):
+    def get_list_url(self, source_page: str) -> list:
         soup = BeautifulSoup(source_page, 'html.parser')
         return [
             product['href']
             for product in soup.find_all("a", class_='showcase-item-image')
         ]
 
-    def request_itens(self):
+    def request_itens(self) -> list:
         logger.info("Requesting items")
         try:
             response = Request(
