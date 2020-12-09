@@ -1,19 +1,19 @@
 import unittest
 
 from unittest.mock import patch, Mock
-from src.usecase.get_shampoo import GetShampoo
+from src.usecase.get_finisher import GetFinisher
 
 
-class TestGetShampoo(unittest.TestCase):
+class TestGetFinisher(unittest.TestCase):
 
-    @patch('src.usecase.get_shampoo.ProviderSelector.parse')
-    def test_get_shampoo_fail(self, mock_get):
+    @patch('src.usecase.get_finisher.ProviderSelector.parse')
+    def test_get_finisher_fail(self, mock_get):
         mock_get.return_value = [None]
-        shampoo = GetShampoo().execute()
-        self.assertIsNone(shampoo)
+        finisher = GetFinisher().execute()
+        self.assertIsNone(finisher)
 
-    @patch('src.usecase.get_shampoo.ProviderSelector.parse')
-    def test_get_shampoo(self, mock_get):
+    @patch('src.usecase.get_finisher.ProviderSelector.parse')
+    def test_get_finisher(self, mock_get):
 
         with open('tests/fixtures/html/beleza.html') as file:
             html = file.read()
@@ -26,5 +26,5 @@ class TestGetShampoo(unittest.TestCase):
 
         mock_get.return_value = [mock_request]
 
-        shampoo = GetShampoo().execute()
-        self.assertIsNone(shampoo)
+        finisher = GetFinisher().execute()
+        self.assertIsNone(finisher)
