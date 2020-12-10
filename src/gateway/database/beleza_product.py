@@ -14,5 +14,5 @@ class BelezaProduct:
             db[product_type].insert_one(asdict(dataclass))
         else:
             db[product_type].update_one(find_query,
-                                   {'$push':
-                                    {'price': product_dict['price'][0]}})
+                                        {'$push':
+                                         {'price': product_dict['price'][0]}})

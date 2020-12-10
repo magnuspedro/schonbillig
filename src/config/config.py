@@ -18,3 +18,8 @@ class Config(Enum):
         'Acessorios': '/api/htmls/showcase?uri=/cabelos/acessorios',
         'Coloracao': '/api/htmls/showcase?uri=/cabelos/coloracao',
     }
+    IKESAKI_BASE_URL = 'https://www.ikesaki.com.br'
+    IKESAKI_PARAMS = '&PageNumber=1'
+    IKESAKI_URLS = {
+        'shampoo': '/buscapagina?fq=C:/1000004/1000013/&PS=48&sl=dc9f5d37-edae-4e7a-8f60-730b8ecb09ec&cc=48&sm=0'
+    }

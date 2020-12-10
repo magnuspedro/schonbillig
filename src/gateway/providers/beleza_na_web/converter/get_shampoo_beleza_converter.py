@@ -41,7 +41,7 @@ class GetShampooBelezaConverter:
         soup = BeautifulSoup(response.text, features="lxml")
 
         name = soup.select(
-            '.nproduct-title')[0].text.strip().split('-')[0].strip()
+            '.nproduct-title')[0].text.strip()
         size = response.url.split('-')[-1].strip('/')
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')

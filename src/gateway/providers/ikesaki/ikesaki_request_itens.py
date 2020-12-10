@@ -9,23 +9,22 @@ from src.config.exceptions.page_not_found_exception \
 logger = PTLogger(name=__name__)
 
 
-class BelezaNaWebRequestItens(ItemRequest):
+class IkesakiRequestItens(ItemRequest):
 
     def __init__(self, source: str, params: str, product: str):
         self.source = source
         self.params = params
         self.product = product
 
-    def get_next_url(self, source_page: str) -> str:
-        soup = BeautifulSoup(source_page, 'html.parser')
-        for button in soup.find_all("button", class_='lazyload'):
-            return button.get('data-ajax')
+    def get_next_url(self, url: str):
+        param, number = url.split('=')
+        self.params = f'{param}={int(number)+1}'
 
     def get_list_url(self, source_page: str) -> list:
         soup = BeautifulSoup(source_page, 'html.parser')
         return [
             product['href']
-            for product in soup.find_all("a", class_='showcase-item-image')
+            for product in soup.select('.position-relative > a')
         ]
 
     def request_itens(self) -> list:
@@ -41,14 +40,18 @@ class BelezaNaWebRequestItens(ItemRequest):
 
         while response:
 
-            next_url = self.get_next_url(response.content)
+            url_list = self.get_list_url(response.content)
 
-            yield self.get_list_url(response.content)
-
-            if next_url is None:
+            if not url_list:
                 break
+
+            yield url_list
+
+            self.get_next_url(self.params)
+
             try:
-                response = Request(url=f'{self.source}{next_url}').request()
+                response = Request(
+                    url=f'{self.source}{self.product}{self.params}').request()
             except PageNotFoundException as e:
                 logger.info('The page was not find', extra={
                     'mdc': {'status_code': e.status_code, 'url': e.url}})

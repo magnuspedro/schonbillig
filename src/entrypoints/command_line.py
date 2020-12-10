@@ -6,9 +6,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 def main():
     run_parallel_usecase(
-        lambda: GetShampoo.execute(),
-        lambda: GetConditioner.execute(),
-        lambda: GetFinisher.execute()
+        lambda: GetShampoo().execute(),
+        # lambda: GetConditioner.execute(),
+        # lambda: GetFinisher.execute()
     )
 
 
