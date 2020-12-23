@@ -2,7 +2,8 @@ from src.gateway.providers.beleza_na_web.converter.get_conditioner_beleza_coneve
     import GetConditionerBelezaConverter
 
 
-class ConditionerBelezaConverterStrategy():
+class ConditionerBelezaConverterStrategy:
 
-    def convert(self, response):
+    @staticmethod
+    def convert(response):
         return GetConditionerBelezaConverter().to_entity(response)

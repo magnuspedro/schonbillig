@@ -2,7 +2,8 @@ from src.gateway.providers.beleza_na_web.converter.get_finisher_beleza_converter
     import GetFinisherBelezaConverter
 
 
-class FinisherBelezaConverterStrategy():
+class FinisherBelezaConverterStrategy:
 
-    def convert(self, response):
+    @staticmethod
+    def convert(response):
         return GetFinisherBelezaConverter().to_entity(response)

@@ -6,7 +6,7 @@ from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.config.logger.logging_module import PTLogger
 from src.gateway.providers.beleza_na_web.beleza_na_web_request_itens import \
-    BelezaNaWebRequestItens
+    BelezaNaWebRequestItems
 from src.gateway.providers.beleza_na_web.strategy.product_selector import \
     ProductSelector
 from src.gateway.providers.request import Request
@@ -23,12 +23,12 @@ class BelezaNaWebSpyder(Spyder):
         logger.debug(f'[BelezaNaWeb] Requesting {ref_product.name} ', extra={
             'mdc': {'url': product, 'product': ref_product.name}})
 
-        for requests in BelezaNaWebRequestItens(
+        for requests in BelezaNaWebRequestItems(
                 params=Config.BELEZA_PARAMAS.value,
                 product=product, source=self.source, ).request_itens():
-            yield from self.request_prodcut(requests)
+            yield from self.request_product(requests)
 
-    def request_prodcut(self, requests: list) -> Response:
+    def request_product(self, requests: list) -> Response:
         for request in requests:
             try:
                 response = Request(self.source + request).request()

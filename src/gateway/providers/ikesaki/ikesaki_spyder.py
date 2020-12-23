@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enumrequest_productrequest_product
 
 from requests import Response
 
@@ -7,7 +7,7 @@ from src.config.exceptions.page_not_found_exception import \
     PageNotFoundException
 from src.config.logger.logging_module import PTLogger
 from src.gateway.providers.ikesaki.ikesaki_request_itens import \
-    IkesakiRequestItens
+    IkesakiRequestItems
 from src.gateway.providers.ikesaki.strategy.product_selector import \
     ProductSelector
 from src.gateway.providers.request import Request
@@ -24,12 +24,13 @@ class IkesakiSpyder(Spyder):
         logger.debug(f'[BelezaNaWeb] Requesting {ref_product.name} ', extra={
             'mdc': {'url': product, 'product': ref_product.name}})
 
-        for requests in IkesakiRequestItens(
+        for requests in IkesakiRequestItems(
                 params=Config.IKESAKI_PARAMS.value,
                 product=product, source=self.source, ).request_itens():
-            yield from self.request_prodcut(requests)
+            yield from self.request_product(requests)
 
-    def request_prodcut(self, requests: list) -> Response:
+    @staticmethod
+    def request_product(requests: list) -> Response:
         for request in requests:
             try:
                 response = Request(request).request()

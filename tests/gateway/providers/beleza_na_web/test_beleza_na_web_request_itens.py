@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.gateway.providers.beleza_na_web.beleza_na_web_request_itens import \
-    BelezaNaWebRequestItens
+    BelezaNaWebRequestItems
 
 
 class TestBelezaNaWebRequestItens(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestBelezaNaWebRequestItens(unittest.TestCase):
             mock_get.return_value.text = content
             mock_get.return_value.content = content
             mock_get.return_value.ok = True
-            return next(BelezaNaWebRequestItens('s', 'p', 'p').request_itens())
+            return next(BelezaNaWebRequestItems('s', 'p', 'p').request_itens())
 
     @patch(
         'src.gateway.providers.beleza_na_web.beleza_na_web_request_itens.Request.request')
@@ -24,7 +24,7 @@ class TestBelezaNaWebRequestItens(unittest.TestCase):
         mock_get.side_effect = PageNotFoundException(
             url='url',
             status_code=404)
-        return next(BelezaNaWebRequestItens('s', 'p', 'p').request_itens())
+        return next(BelezaNaWebRequestItems('s', 'p', 'p').request_itens())
 
     def test_request_itens(self):
         response = self.create_request()

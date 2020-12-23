@@ -11,5 +11,6 @@ class Spyder:
     def start_request(self, urls: str = None) -> Request:
         raise NotImplementedError
 
-    def parse(self):
-        raise NotImplementedError
+    # TODO: Verify Parse is really needed
+    # def parse(self):
+    #     raise NotImplementedError

@@ -9,7 +9,7 @@ from src.gateway.providers.request import Request
 logger = PTLogger(name=__name__)
 
 
-class BelezaNaWebRequestItens(ItemRequest):
+class BelezaNaWebRequestItems(ItemRequest):
 
     def __init__(self, source: str, params: str, product: str):
         self.source = source

@@ -4,5 +4,6 @@ from src.gateway.providers.beleza_na_web.converter.get_shampoo_beleza_converter 
 
 class ShampooBelezaConverterStrategy:
 
-    def convert(self, response):
+    @staticmethod
+    def convert(response):
         return GetShampooBelezaConverter().to_entity(response)

@@ -2,7 +2,8 @@ from src.gateway.providers.ikesaki.converter.get_shampoo_ikesaki_converter \
     import GetShampooIkesakiConverter
 
 
-class ShampooIkesakiConverterStrategy():
+class ShampooIkesakiConverterStrategy:
 
-    def convert(self, response):
+    @staticmethod
+    def convert(response):
         return GetShampooIkesakiConverter().to_entity(response)
