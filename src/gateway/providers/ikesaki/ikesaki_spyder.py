@@ -1,4 +1,4 @@
-from enum import Enumrequest_productrequest_product
+from enum import Enum
 
 from requests import Response
 
