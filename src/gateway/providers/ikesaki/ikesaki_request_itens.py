@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
-from src.config.logger.logging_module import PTLogger
 
-from src.gateway.providers.item_request import ItemRequest
-from src.gateway.providers.request import Request
 from src.config.exceptions.page_not_found_exception \
     import PageNotFoundException
+from src.config.logger.logging_module import PTLogger
+from src.gateway.providers.item_request import ItemRequest
+from src.gateway.providers.request import Request
 
 logger = PTLogger(name=__name__)
 
@@ -18,7 +18,7 @@ class IkesakiRequestItens(ItemRequest):
 
     def get_next_url(self, url: str):
         param, number = url.split('=')
-        self.params = f'{param}={int(number)+1}'
+        self.params = f'{param}={int(number) + 1}'
 
     def get_list_url(self, source_page: str) -> list:
         soup = BeautifulSoup(source_page, 'html.parser')

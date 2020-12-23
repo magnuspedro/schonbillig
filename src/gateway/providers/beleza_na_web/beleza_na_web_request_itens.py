@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
-from src.config.logger.logging_module import PTLogger
 
-from src.gateway.providers.item_request import ItemRequest
-from src.gateway.providers.request import Request
 from src.config.exceptions.page_not_found_exception \
     import PageNotFoundException
+from src.config.logger.logging_module import PTLogger
+from src.gateway.providers.item_request import ItemRequest
+from src.gateway.providers.request import Request
 
 logger = PTLogger(name=__name__)
 

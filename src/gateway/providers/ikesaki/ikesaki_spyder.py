@@ -1,6 +1,7 @@
 from enum import Enum
 
 from requests import Response
+
 from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import \
     PageNotFoundException
@@ -16,17 +17,16 @@ logger = PTLogger(name=__name__)
 
 
 class IkesakiSpyder(Spyder):
-
     source = Config.IKESAKI_BASE_URL.value
 
     def start_request(self, ref_product: Enum) -> Response:
         product = ProductSelector(ref_product.value).choose_product()
         logger.debug(f'[BelezaNaWeb] Requesting {ref_product.name} ', extra={
-                     'mdc': {'url': product, 'product': ref_product.name}})
+            'mdc': {'url': product, 'product': ref_product.name}})
 
         for requests in IkesakiRequestItens(
                 params=Config.IKESAKI_PARAMS.value,
-                product=product, source=self.source,).request_itens():
+                product=product, source=self.source, ).request_itens():
             yield from self.request_prodcut(requests)
 
     def request_prodcut(self, requests: list) -> Response:

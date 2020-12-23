@@ -4,11 +4,10 @@ from src.gateway.database.beleza_product import BelezaProduct
 from src.gateway.providers.converter.strategy.converter import Converter
 from src.gateway.providers.converter.strategy.converter_selector import \
     ConverterSelector
+from src.gateway.providers.ikesaki.ikesaki_spyder import IkesakiSpyder
 from src.gateway.providers.product import Product
 from src.gateway.providers.strategy.provider import Provider
 from src.gateway.providers.strategy.provider_selector import ProviderSelector
-
-from src.gateway.providers.ikesaki.ikesaki_spyder import IkesakiSpyder
 
 logger = PTLogger(name=__name__)
 
@@ -36,7 +35,7 @@ class GetShampoo:
                 Provider.BELEZA_NA_WEB.value).parse(Product.SHAMPOO_BELEZA):
 
             logger.info('Converting request')
-            if(product):
+            if (product):
                 product = ConverterSelector(
                     Converter.SHAMPOO_BELEZA.value).convert(product)
                 logger.info(product)

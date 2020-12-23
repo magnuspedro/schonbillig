@@ -1,8 +1,9 @@
 import requests
-from src.config.logger.logging_module import PTLogger
-from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from tenacity import retry, stop_after_attempt, wait_fixed
+
 from src.config.config import Config
+from src.config.exceptions.page_not_found_exception import PageNotFoundException
+from src.config.logger.logging_module import PTLogger
 
 logger = PTLogger(name=__name__)
 

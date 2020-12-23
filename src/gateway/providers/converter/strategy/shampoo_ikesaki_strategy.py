@@ -1,4 +1,4 @@
-from src.gateway.providers.ikesaki.converter.get_shampoo_ikesaki_converter\
+from src.gateway.providers.ikesaki.converter.get_shampoo_ikesaki_converter \
     import GetShampooIkesakiConverter
 
 

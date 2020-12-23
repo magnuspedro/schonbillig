@@ -18,10 +18,10 @@ class GetConditioner:
     def execute():
         for product in ProviderSelector(
                 Provider.BELEZA_NA_WEB.value).parse(
-                    Product.CONDITIONER_BELEZA):
+            Product.CONDITIONER_BELEZA):
 
             logger.info('Converting request')
-            if(product):
+            if (product):
                 product = ConverterSelector(
                     Converter.CONDITIONER_BELEZA.value).convert(product)
                 logger.info(product)

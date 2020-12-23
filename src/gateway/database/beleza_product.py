@@ -1,5 +1,6 @@
-from src.config.db import db
 from dataclasses import asdict, dataclass
+
+from src.config.db import db
 
 
 class BelezaProduct:
@@ -15,4 +16,4 @@ class BelezaProduct:
         else:
             db[product_type].update_one(find_query,
                                         {'$push':
-                                         {'price': product_dict['price'][0]}})
+                                             {'price': product_dict['price'][0]}})

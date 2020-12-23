@@ -19,7 +19,7 @@ class GetFinisher:
                 Provider.BELEZA_NA_WEB.value).parse(Product.FINISHER_BELEZA):
 
             logger.info('Converting request')
-            if(product):
+            if (product):
                 product = ConverterSelector(
                     Converter.FINISHER_BELEZA.value).convert(product)
                 logger.info(product)

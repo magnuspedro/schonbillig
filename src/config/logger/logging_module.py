@@ -1,8 +1,9 @@
 import logging
 import sys
 from logging import Logger
-from pythonjsonlogger import jsonlogger
 from logging.handlers import TimedRotatingFileHandler
+
+from pythonjsonlogger import jsonlogger
 
 
 class PTLogger(Logger):

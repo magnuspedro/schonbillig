@@ -1,13 +1,10 @@
 from enum import Enum
 
-from .shampoo_beleza_converter_strategy \
-    import ShampooBelezaConverterStrategy
-from .conditioner_beleza_converter_strategy \
-    import ConditionerBelezaConverterStrategy
-from .finisher_beleza_converter_strategy \
-    import FinisherBelezaConverterStrategy
-from .shampoo_ikesaki_strategy \
-    import ShampooIkesakiConverterStrategy
+from src.gateway.providers.converter.strategy.conditioner_beleza_converter_strategy import \
+    ConditionerBelezaConverterStrategy
+from src.gateway.providers.converter.strategy.finisher_beleza_converter_strategy import FinisherBelezaConverterStrategy
+from src.gateway.providers.converter.strategy.shampoo_beleza_converter_strategy import ShampooBelezaConverterStrategy
+from src.gateway.providers.converter.strategy.shampoo_ikesaki_strategy import ShampooIkesakiConverterStrategy
 
 
 class Converter(Enum):

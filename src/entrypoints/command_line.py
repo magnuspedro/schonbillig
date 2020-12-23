@@ -1,7 +1,8 @@
-from src.usecase.get_shampoo import GetShampoo
+from concurrent.futures import ThreadPoolExecutor
+
 from src.usecase.get_conditioner import GetConditioner
 from src.usecase.get_finisher import GetFinisher
-from concurrent.futures import ThreadPoolExecutor
+from src.usecase.get_shampoo import GetShampoo
 
 
 def main():

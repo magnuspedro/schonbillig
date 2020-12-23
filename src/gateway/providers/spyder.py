@@ -1,5 +1,6 @@
-from src.config.logger.logging_module import PTLogger
 from requests import Request
+
+from src.config.logger.logging_module import PTLogger
 
 logger = PTLogger(name=__name__)
 
