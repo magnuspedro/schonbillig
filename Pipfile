@@ -15,6 +15,7 @@ numpy = "*"
 twisted = "*"
 print = "*"
 dnspython = "*"
+sklearn = "*"
 
 [dev-packages]
 
