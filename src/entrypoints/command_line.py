@@ -9,9 +9,9 @@ from src.usecase.get_treatment import GetTreatment
 def main():
     run_parallel_usecase(
         lambda: GetShampoo().execute(),
-        # lambda: GetConditioner.execute(),
-        # lambda: GetFinisher.execute(),
-        # lambda: GetTreatment.execute()
+        lambda: GetConditioner.execute(),
+        lambda: GetFinisher.execute(),
+        lambda: GetTreatment.execute()
     )
 
 
