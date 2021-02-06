@@ -2,7 +2,7 @@ import unittest
 
 from unittest.mock import patch
 from src.entities.shampoo import Shampoo
-from src.gateway.providers.beleza_na_web.converter.get_shampoo_beleza_converter import \
+from src.gateway.providers.beleza.converter.get_shampoo_beleza_converter import \
     GetShampooBelezaConverter
 import requests
 

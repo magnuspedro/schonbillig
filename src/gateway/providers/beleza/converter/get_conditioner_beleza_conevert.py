@@ -56,7 +56,6 @@ class GetConditionerBelezaConverter:
     def specs(self, info_label: str) -> dict:
         conditioner_specs = {}
         for info in info_label:
-            spec = ''
             if not info.strong:
                 spec = info.span.find_next('span').text.strip()
             else:

@@ -2,7 +2,7 @@ import unittest
 
 from unittest.mock import patch
 from src.entities.conditioner import Conditioner
-from src.gateway.providers.beleza_na_web.converter.get_conditioner_beleza_conevert import \
+from src.gateway.providers.beleza.converter.get_conditioner_beleza_conevert import \
     GetConditionerBelezaConverter
 import requests
 

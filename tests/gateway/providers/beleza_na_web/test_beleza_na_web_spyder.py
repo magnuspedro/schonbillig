@@ -2,15 +2,15 @@ import unittest
 from unittest.mock import Mock, patch
 
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
-from src.gateway.providers.beleza_na_web.beleza_na_web_spyder import \
+from src.gateway.providers.beleza.beleza_spyder import \
     BelezaNaWebSpyder
 from src.entities.enum.product import Product
 
 
 class TestBelezaNaWebSpyder(unittest.TestCase):
 
-    @patch('src.gateway.providers.beleza_na_web.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
-    @patch('src.gateway.providers.beleza_na_web.beleza_na_web_spyder.Request.request')
+    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
+    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.Request.request')
     def test_fail_product(self, mock_itens, mock_get):
         mock_get.return_value = ['http://www.belezanaweb.com.br', 'url']
 
@@ -19,8 +19,8 @@ class TestBelezaNaWebSpyder(unittest.TestCase):
             Product.SHAMPOO_BELEZA))
         self.assertIsNone(response)
 
-    @patch('src.gateway.providers.beleza_na_web.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
-    @patch('src.gateway.providers.beleza_na_web.beleza_na_web_spyder.Request.request')
+    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
+    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.Request.request')
     def test_individual_product(self, mock_request, mock_get):
 
         mock_get.return_value = ['http://www.belezanaweb.com.br', 'url']

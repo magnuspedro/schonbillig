@@ -10,7 +10,7 @@ class Config(Enum):
         'shampoo': '/api/htmls/showcase?uri=/cabelos/shampoo',
         'KitsTratamento': '/api/htmls/showcase?uri=/cabelos/kits-de-tratamento',
         'conditioner': '/api/htmls/showcase?uri=/cabelos/condicionador',
-        'Tratamento': '/api/htmls/showcase?uri=/cabelos/tratamento',
+        'treatment': '/api/htmls/showcase?uri=/cabelos/tratamento',
         'LeaveIneCremeParaPentear': '/api/htmls/showcase?uri=/cabelos/leave-in-e-creme-para-pentear',
         'finisher': '/api/htmls/showcase?uri=/cabelos/finalizador',
         'Modelador': '/api/htmls/showcase?uri=/cabelos/modelador',

@@ -1,4 +1,4 @@
-from src.gateway.providers.beleza_na_web.beleza_na_web_spyder import BelezaNaWebSpyder
+from src.gateway.providers.beleza.beleza_spyder import BelezaNaWebSpyder
 from src.gateway.database.provider_strategy import ProviderStrategy
 
 

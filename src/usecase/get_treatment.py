@@ -11,21 +11,19 @@ from src.gateway.providers.provider_selector import ProviderSelector
 logger = PTLogger(name=__name__)
 
 
-class GetConditioner:
+class GetTreatment:
 
     @staticmethod
     def execute():
         for product in ProviderSelector(
-                Provider.BELEZA_NA_WEB.value).parse(
-            Product.CONDITIONER_BELEZA):
+                Provider.BELEZA_NA_WEB.value).parse(Product.TREATMENT_BELEZA):
 
             logger.info('Converting request')
             if product:
                 product = ConverterSelector(
-                    Converter.CONDITIONER_BELEZA.value).convert(product)
+                    Converter.FINISHER_BELEZA.value).convert(product)
                 logger.info(product)
                 logger.info('Converted successfully')
-                BelezaProduct.insert_product(
-                    product, Products.CONDITIONER.value)
+                BelezaProduct.insert_product(product, Products.TREATMENT.value)
             else:
                 logger.info('Error retriving product, going to the next one')

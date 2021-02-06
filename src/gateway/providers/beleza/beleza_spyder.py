@@ -5,9 +5,9 @@ from requests import Response
 from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.config.logger.logging_module import PTLogger
-from src.gateway.providers.beleza_na_web.beleza_na_web_request_items import \
+from src.gateway.providers.beleza.beleza_request_items import \
     BelezaNaWebRequestItems
-from src.gateway.providers.beleza_na_web.products.product_selector import \
+from src.gateway.providers.beleza.products.product_selector import \
     ProductSelector
 from src.gateway.providers.bases.request import Request
 from src.gateway.providers.bases.spyder import Spyder

@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
-from src.gateway.providers.beleza_na_web.beleza_na_web_request_items import \
+from src.gateway.providers.beleza.beleza_request_items import \
     BelezaNaWebRequestItems
 
 

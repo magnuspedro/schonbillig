@@ -2,7 +2,7 @@ import unittest
 
 from unittest.mock import patch
 from src.entities.finisher import Finisher
-from src.gateway.providers.beleza_na_web.converter.get_finisher_beleza_converter import \
+from src.gateway.providers.beleza.converter.get_finisher_beleza_converter import \
     GetFinisherBelezaConverter
 import requests
 
