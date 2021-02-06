@@ -11,6 +11,7 @@ from src.gateway.providers.beleza.products.product_selector import \
     ProductSelector
 from src.gateway.providers.bases.request import Request
 from src.gateway.providers.bases.spyder import Spyder
+from concurrent.futures import ThreadPoolExecutor,  as_completed
 
 logger = PTLogger(name=__name__)
 
@@ -29,9 +30,14 @@ class BelezaNaWebSpyder(Spyder):
             yield from self.request_product(requests)
 
     def request_product(self, requests: list) -> Response:
-        for request in requests:
+        process = []
+        # responses = []
+        with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
+            for request in requests:
+                process.append(executor.submit(Request(self.source + request).request))
+        for task in as_completed(process):
             try:
-                response = Request(self.source + request).request()
+                response = task.result()
             except PageNotFoundException as e:
 
                 logger.info('The page was not find', extra={
@@ -39,4 +45,6 @@ class BelezaNaWebSpyder(Spyder):
                 yield
                 continue
             if response.ok:
+                # responses.append(response)
                 yield response
+        # return responses
