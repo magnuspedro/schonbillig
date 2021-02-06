@@ -7,7 +7,7 @@ from src.entities.code import Code
 from src.entities.price import Price
 from src.entities.shampoo import Shampoo
 from src.entities.url import Url
-from src.gateway.providers.beleza_na_web.enum.info_line import InfoLine
+from src.entities.enum.beleza_na_web_info_line import InfoLine
 
 logger = PTLogger(name=__name__)
 

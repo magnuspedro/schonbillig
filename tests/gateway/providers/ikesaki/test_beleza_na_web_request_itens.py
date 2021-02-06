@@ -9,9 +9,9 @@ from src.gateway.providers.beleza_na_web.beleza_na_web_request_items import \
 class TestBelezaNaWebRequestItens(unittest.TestCase):
 
     @patch(
-        'src.gateway.providers.beleza_na_web.beleza_na_web_request_itens.Request.request')
+        'src.gateway.providers.ikesaki.ikesaki_request_itens.Request.request')
     def create_request(self, mock_get):
-        with open('tests/fixtures/html/beleza_list.html', 'r') as f:
+        with open('tests/fixtures/html/ikesaki_list.html', 'r') as f:
             content = f.read()
             mock_get.return_value.text = content
             mock_get.return_value.content = content
@@ -19,7 +19,7 @@ class TestBelezaNaWebRequestItens(unittest.TestCase):
             return next(BelezaNaWebRequestItems('s', 'p', 'p').request_itens())
 
     @patch(
-        'src.gateway.providers.beleza_na_web.beleza_na_web_request_itens.Request.request')
+        'src.gateway.providers.ikesaki.ikesaki_request_itens.Request.request')
     def create_fail_request(self, mock_get):
         mock_get.side_effect = PageNotFoundException(
             url='url',

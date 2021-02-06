@@ -16,7 +16,7 @@ class Request:
         self.url = url
         self.body = body
         self.cookies = cookies or {}
-        self.headers = headers or {}
+        self.headers = headers or {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 
     @property
     def url(self) -> str:
@@ -32,7 +32,7 @@ class Request:
     @retry(stop=stop_after_attempt(Config.REQUEST_RETRY.value),
            wait=wait_fixed(Config.WAITING_TIME.value))
     def request(self) -> requests.Response:
-
+        logger.info('[Requests] Starting request')
         response = requests.request(
             self.method, self.url, headers=self.headers, cookies=self.cookies)
         logger.info(f'[{response.status_code}] --> Status Code',

@@ -1,8 +1,6 @@
 from unittest.mock import patch
 from unittest import TestCase
-from src.gateway.providers.request import Request
-from src.config.exceptions.page_not_found_exception \
-    import PageNotFoundException
+from src.gateway.providers.bases.request import Request
 from tenacity import RetryError
 
 
@@ -14,8 +12,6 @@ class TestRequest(TestCase):
         mock_get.return_value.status_code = 200
 
         response = Request('url').request()
-
-        print(response.__dict__)
 
         self.assertIsNotNone(response, 'Request cannot be null')
         self.assertEqual(response.ok, True, 'Request has to be successfull')

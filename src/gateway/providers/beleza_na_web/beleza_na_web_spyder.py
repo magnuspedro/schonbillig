@@ -5,12 +5,12 @@ from requests import Response
 from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.config.logger.logging_module import PTLogger
-from src.gateway.providers.beleza_na_web.beleza_na_web_request_itens import \
+from src.gateway.providers.beleza_na_web.beleza_na_web_request_items import \
     BelezaNaWebRequestItems
-from src.gateway.providers.beleza_na_web.strategy.product_selector import \
+from src.gateway.providers.beleza_na_web.products.product_selector import \
     ProductSelector
-from src.gateway.providers.request import Request
-from src.gateway.providers.spyder import Spyder
+from src.gateway.providers.bases.request import Request
+from src.gateway.providers.bases.spyder import Spyder
 
 logger = PTLogger(name=__name__)
 

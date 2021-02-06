@@ -2,12 +2,11 @@ from bs4 import BeautifulSoup
 from requests import Response
 from url_parser import get_url
 
-from src.config.logger.logging_module import PTLogger
 from src.entities.code import Code
 from src.entities.conditioner import Conditioner
 from src.entities.price import Price
 from src.entities.url import Url
-from src.gateway.providers.beleza_na_web.enum.info_line import InfoLine
+from src.entities.enum.beleza_na_web_info_line import InfoLine
 
 
 class GetConditionerBelezaConverter:
