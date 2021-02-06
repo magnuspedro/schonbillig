@@ -11,7 +11,7 @@ class Config(Enum):
         'KitsTratamento': '/api/htmls/showcase?uri=/cabelos/kits-de-tratamento',
         'conditioner': '/api/htmls/showcase?uri=/cabelos/condicionador',
         'treatment': '/api/htmls/showcase?uri=/cabelos/tratamento',
-        'LeaveIneCremeParaPentear': '/api/htmls/showcase?uri=/cabelos/leave-in-e-creme-para-pentear',
+        'leave': '/api/htmls/showcase?uri=/cabelos/leave-in-e-creme-para-pentear',
         'finisher': '/api/htmls/showcase?uri=/cabelos/finalizador',
         'Modelador': '/api/htmls/showcase?uri=/cabelos/modelador',
         'EscovaProgressiva': '/api/htmls/showcase?uri=/cabelos/escova-progressiva',

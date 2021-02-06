@@ -12,9 +12,9 @@ pymongo = "*"
 url-parser = "*"
 tenacity = "*"
 numpy = "*"
-sklearn = "*"
 twisted = "*"
 print = "*"
+dnspython = "*"
 
 [dev-packages]
 
