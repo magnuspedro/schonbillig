@@ -1,3 +1,6 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+from src.config.config import Config
 from src.config.logger.logging_module import PTLogger
 from src.entities.bl.compare_product import CompareProduct
 from src.entities.enum.products import Products
@@ -37,15 +40,18 @@ class GetShampoo:
                 logger.info('Error retriving product, going to the next one')
 
     def beleza_na_web(self):
-        for product in ProviderSelector(
-                Provider.BELEZA_NA_WEB.value).parse(Product.SHAMPOO_BELEZA):
+        converter = ConverterSelector(Converter.SHAMPOO_BELEZA.value)
+        products = ProviderSelector(
+            Provider.BELEZA_NA_WEB.value).parse(Product.SHAMPOO_BELEZA)
+        logger.info(f'Number of Products {len(products)}')
+        with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
+            process = [executor.submit(converter.convert, product) for product in products]
+            print(process)
 
-            logger.info('Converting request')
-            if product:
-                product = ConverterSelector(
-                    Converter.SHAMPOO_BELEZA.value).convert(product)
-                logger.info(product)
-                logger.info('Converted successfully')
-                BelezaProduct.insert_product(product, Products.SHAMPOO.value)
-            else:
-                logger.info('Error retriving product, going to the next one')
+        for task in process:
+            product = task.result()
+            logger.info(product)
+            logger.info('Converted successfully')
+            BelezaProduct.insert_product(product, Products.SHAMPOO.value)
+            # else:
+            #     logger.info('Error retriving product, going to the next one')

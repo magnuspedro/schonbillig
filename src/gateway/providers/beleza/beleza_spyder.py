@@ -11,7 +11,7 @@ from src.gateway.providers.beleza.products.product_selector import \
     ProductSelector
 from src.gateway.providers.bases.request import Request
 from src.gateway.providers.bases.spyder import Spyder
-from concurrent.futures import ThreadPoolExecutor,  as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 logger = PTLogger(name=__name__)
 
@@ -24,17 +24,15 @@ class BelezaNaWebSpyder(Spyder):
         logger.debug(f'[BelezaNaWeb] Requesting {ref_product.name} ', extra={
             'mdc': {'url': product, 'product': ref_product.name}})
 
-        for requests in BelezaNaWebRequestItems(
-                params=Config.BELEZA_PARAMAS.value,
-                product=product, source=self.source, ).request_itens():
-            yield from self.request_product(requests)
+        requests = BelezaNaWebRequestItems(
+            params=Config.BELEZA_PARAMAS.value,
+            product=product, source=self.source, ).request_itens()
+        return self.request_product(requests)
 
     def request_product(self, requests: list) -> Response:
-        process = []
-        # responses = []
+        responses = []
         with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
-            for request in requests:
-                process.append(executor.submit(Request(self.source + request).request))
+            process = [(executor.submit(Request(self.source + request).request)) for request in requests]
         for task in as_completed(process):
             try:
                 response = task.result()
@@ -42,9 +40,9 @@ class BelezaNaWebSpyder(Spyder):
 
                 logger.info('The page was not find', extra={
                     'mdc': {'status_code': e.status_code, 'url': e.url}})
-                yield
+                # yield
                 continue
             if response.ok:
-                # responses.append(response)
-                yield response
-        # return responses
+                responses.append(response)
+                # yield response
+        return responses

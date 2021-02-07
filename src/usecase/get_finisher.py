@@ -1,3 +1,6 @@
+from concurrent.futures.thread import ThreadPoolExecutor
+
+from src.config.config import Config
 from src.config.logger.logging_module import PTLogger
 from src.entities.enum.products import Products
 from src.gateway.database.beleza_product import BelezaProduct
@@ -15,15 +18,17 @@ class GetFinisher:
 
     @staticmethod
     def execute():
-        for product in ProviderSelector(
-                Provider.BELEZA_NA_WEB.value).parse(Product.FINISHER_BELEZA):
+        converter = ConverterSelector(Converter.FINISHER_BELEZA.value)
+        products = ProviderSelector(
+            Provider.BELEZA_NA_WEB.value).parse(Product.FINISHER_BELEZA)
+        logger.info(f'Number of Products {len(products)}')
+        with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
+            process = [executor.submit(converter.convert, product) for product in products]
+            print(process)
 
-            logger.info('Converting request')
-            if product:
-                product = ConverterSelector(
-                    Converter.FINISHER_BELEZA.value).convert(product)
-                logger.info(product)
-                logger.info('Converted successfully')
-                BelezaProduct.insert_product(product, Products.FINISHER.value)
-            else:
-                logger.info('Error retriving product, going to the next one')
+        for task in process:
+            product = task.result()
+            logger.info(product)
+            logger.info('Converted successfully')
+            BelezaProduct.insert_product(product, Products.FINISHER.value)
+
