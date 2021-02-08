@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - deploy
+#  - deploy
 
 # Staging
 
@@ -22,8 +22,8 @@ test_stage:
   script:
     - python -m pytest tests/
 
-deplay_stage:
-  stage: deploy
-  image: python
-  only:
-    - stage
+#deplay_stage:
+#  stage: deploy
+#  image: python
+#  only:
+#    - stage

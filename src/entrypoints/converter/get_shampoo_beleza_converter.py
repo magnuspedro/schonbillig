@@ -4,10 +4,10 @@ from url_parser import get_url
 
 from src.config.logger.logging_module import PTLogger
 from src.entities.code import Code
+from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entities.price import Price
 from src.entities.shampoo import Shampoo
 from src.entities.url import Url
-from src.entities.enum.beleza_na_web_info_line import InfoLine
 
 logger = PTLogger(name=__name__)
 
@@ -20,7 +20,7 @@ class GetShampooBelezaConverter:
             response)
 
         return Shampoo(
-            name=name,
+            name=name.replace('\n', '').split('-')[0].strip(),
             brand=shampoo_specs.get(InfoLine.BRAND.value),
             brand_line=shampoo_specs.get(InfoLine.LINE.value),
             vegan=False,
