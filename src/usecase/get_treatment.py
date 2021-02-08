@@ -5,7 +5,7 @@ from src.config.logger.logging_module import PTLogger
 from src.entities.enum.products import Products
 from src.gateway.database.beleza_product import BelezaProduct
 from src.entities.enum.converter import Converter
-from src.gateway.providers.converter_selector import \
+from src.entrypoints.converter.converter_selector import \
     ConverterSelector
 from src.entities.enum.product import Product
 from src.entities.enum.provider import Provider

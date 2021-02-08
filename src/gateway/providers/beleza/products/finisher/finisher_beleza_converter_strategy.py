@@ -1,4 +1,4 @@
-from src.gateway.providers.beleza.converter.get_finisher_beleza_converter \
+from src.entrypoints.converter.get_finisher_beleza_converter \
     import GetFinisherBelezaConverter
 
 
