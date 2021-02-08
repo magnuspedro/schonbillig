@@ -50,7 +50,7 @@ class GetShampooBelezaConverter:
         price = soup.select('.nproduct-price-value')
         if price:
             price = price[0].text.strip().split(
-                '$')[1].strip().replace(',', '.')
+                '$')[1].strip().replace('.', '').replace(',', '.')
         else:
             price = 'nan'
         return name, size, info_label, sku, shampoo_specs, price

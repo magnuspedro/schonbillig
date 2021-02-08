@@ -1,5 +1,5 @@
 from src.config.config import Config
-from src.gateway.providers.product_strategy import ProductStrategy
+from src.gateway.providers.bases.product_strategy import ProductStrategy
 
 
 class LeaveBelezaStrategy(ProductStrategy):

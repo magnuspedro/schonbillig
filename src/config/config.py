@@ -23,4 +23,4 @@ class Config(Enum):
     IKESAKI_URLS = {
         'shampoo': '/buscapagina?fq=C:/1000004/1000013/&PS=48&sl=dc9f5d37-edae-4e7a-8f60-730b8ecb09ec&cc=48&sm=0'
     }
-    REQUEST_MAX_WORKERS = 100
+    REQUEST_MAX_WORKERS = 40

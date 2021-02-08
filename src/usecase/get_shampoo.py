@@ -1,12 +1,12 @@
 from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import Pool
 
 from src.config.config import Config
 from src.config.logger.logging_module import PTLogger
-from src.entities.bl.compare_product import CompareProduct
 from src.entities.enum.products import Products
 from src.gateway.database.beleza_product import BelezaProduct
 from src.entities.enum.converter import Converter
-from src.entrypoints.converter.converter_selector import \
+from src.gateway.providers.converter_selector import \
     ConverterSelector
 from src.entities.enum.product import Product
 from src.entities.enum.provider import Provider
@@ -21,37 +21,21 @@ class GetShampoo:
         # self.ikesaki()
         self.beleza_na_web()
 
-    def ikesaki(self):
-        for product in ProviderSelector(
-                Provider.IKESAKI.value).parse(Product.SHAMPOO_IKESAKI):
-            if product:
-                product = ConverterSelector(
-                    Converter.SHAMPOO_IKESAKI.value
-                ).convert(product)
-                logger.info(product)
-                logger.info('Converted successfully')
-                products = BelezaProduct.find_product(Products.SHAMPOO.value, product.brand)
-                result = []
-                for prod in products:
-                    result.append(f'{CompareProduct.compare(prod["name"], product.name)} - {prod["code"][0]["code"]}')
-                result.sort(reverse=True)
-                logger.info(f'\n\n\n\n\n\n{result}')
-            else:
-                logger.info('Error retriving product, going to the next one')
-
     def beleza_na_web(self):
         converter = ConverterSelector(Converter.SHAMPOO_BELEZA.value)
         products = ProviderSelector(
             Provider.BELEZA_NA_WEB.value).parse(Product.SHAMPOO_BELEZA)
         logger.info(f'Number of Products {len(products)}')
+        try:
+            pool = Pool()
+            products = pool.map(converter.convert, products)
+        finally:
+            logger.info('Products Converted successfully')
+            pool.close()
+            pool.join()
         with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
-            process = [executor.submit(converter.convert, product) for product in products]
-            print(process)
-
+            process = [executor.submit(
+                BelezaProduct.insert_product, product, Products.SHAMPOO.value) for product in products]
+        logger.info('Sending product to database')
         for task in process:
-            product = task.result()
-            logger.info(product)
-            logger.info('Converted successfully')
-            BelezaProduct.insert_product(product, Products.SHAMPOO.value)
-            # else:
-            #     logger.info('Error retriving product, going to the next one')
+            task.result()

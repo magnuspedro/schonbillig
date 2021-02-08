@@ -6,13 +6,15 @@ from src.gateway.providers.beleza.products.finisher.finisher_beleza_converter_st
     FinisherBelezaConverterStrategy
 from src.gateway.providers.beleza.products.shampoo.shampoo_beleza_converter_strategy import \
     ShampooBelezaConverterStrategy
-from src.gateway.providers.beleza.products.treatment.treatment_beleza_strategy import TreatmentBelezaStrategy
-from src.gateway.providers.ikesaki.products.shampoo.shampoo_ikesak_converteri_strategy import ShampooIkesakiConverterStrategy
+from src.gateway.providers.beleza.products.treatment.treatment_beleza_converter_strategy import \
+    TreatmentBelezaConverterStrategy
+from src.gateway.providers.ikesaki.products.shampoo.shampoo_ikesak_converteri_strategy import \
+    ShampooIkesakiConverterStrategy
 
 
 class Converter(Enum):
     SHAMPOO_BELEZA = ShampooBelezaConverterStrategy
     CONDITIONER_BELEZA = ConditionerBelezaConverterStrategy
-    TREATMENT_BELEZA = TreatmentBelezaStrategy
+    TREATMENT_BELEZA = TreatmentBelezaConverterStrategy
     FINISHER_BELEZA = FinisherBelezaConverterStrategy
     SHAMPOO_IKESAKI = ShampooIkesakiConverterStrategy
