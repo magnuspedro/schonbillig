@@ -1,6 +1,3 @@
-import pytest
-
-
 # @pytest.fixture
 def shampoo_wella():
     name = '''<h1 class="nproduct-title">
@@ -92,5 +89,5 @@ def shampoo_wella():
         R$ 555.059,90
     </div>
 </div>'''
-    html = name+size+sku+infos+price
+    html = name + size + sku + infos + price
     return html
