@@ -27,7 +27,7 @@ class IkesakiRequestItems(ItemRequest):
             for product in soup.select('.position-relative > a')
         ]
 
-    def request_itens(self) -> list:
+    def request_items(self) -> list:
         logger.info("Requesting items")
         try:
             response = Request(

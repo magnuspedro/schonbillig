@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 
 from src.config.exceptions.page_not_found_exception \
     import PageNotFoundException
+from tenacity import RetryError
 from src.config.logger.logging_module import PTLogger
 from src.gateway.providers.bases.item_request import ItemRequest
 from src.gateway.providers.bases.request import Request
@@ -9,7 +10,7 @@ from src.gateway.providers.bases.request import Request
 logger = PTLogger(name=__name__)
 
 
-class BelezaNaWebRequestItems(ItemRequest):
+class BelezaRequestItems(ItemRequest):
 
     def __init__(self, source: str, params: str, product: str):
         self.source = source
@@ -28,15 +29,15 @@ class BelezaNaWebRequestItems(ItemRequest):
             for product in soup.find_all("a", class_='showcase-item-image')
         ]
 
-    def request_itens(self) -> list:
+    def request_items(self) -> list:
         logger.info("Requesting items")
         urls = []
         try:
             response = Request(
                 url=f'{self.source}{self.product}{self.params}').request()
-        except PageNotFoundException as e:
-            logger.info('The page was not find', extra={
-                'mdc': {'status_code': e.status_code, 'url': e.url}})
+        except RetryError as e:
+            logger.error('The page was not found', extra={
+                'mdc': {'url': f'{self.source}{self.product}{self.params}'}})
             response = None
             # yield
 
@@ -50,8 +51,8 @@ class BelezaNaWebRequestItems(ItemRequest):
                 break
             try:
                 response = Request(url=f'{self.source}{next_url}').request()
-            except PageNotFoundException as e:
-                logger.info('The page was not find', extra={
-                    'mdc': {'status_code': e.status_code, 'url': e.url}})
+            except RetryError as e:
+                logger.error('The page was not found', extra={
+                    'mdc': {'url': f'{self.source}{self.product}{self.params}'}})
                 break
         return urls

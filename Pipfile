@@ -17,6 +17,8 @@ print = "*"
 dnspython = "*"
 sklearn = "*"
 pytest = "*"
+pytest-mock = "*"
+requests-mock = "*"
 
 [dev-packages]
 

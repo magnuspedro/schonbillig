@@ -6,7 +6,7 @@ from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.config.logger.logging_module import PTLogger
 from src.gateway.providers.beleza.beleza_request_items import \
-    BelezaNaWebRequestItems
+    BelezaRequestItems
 from src.gateway.providers.beleza.products.product_selector import \
     ProductSelector
 from src.gateway.providers.bases.request import Request
@@ -16,20 +16,20 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 logger = PTLogger(name=__name__)
 
 
-class BelezaNaWebSpyder(Spyder):
+class BelezaSpyder(Spyder):
     source = Config.BELEZA_BASE_URL.value
 
-    def start_request(self, ref_product: Enum) -> Response:
+    def start_request(self, ref_product: Enum) -> list:
         product = ProductSelector(ref_product.value).choose_product()
         logger.debug(f'[BelezaNaWeb] Requesting {ref_product.name} ', extra={
             'mdc': {'url': product, 'product': ref_product.name}})
 
-        requests = BelezaNaWebRequestItems(
+        requests = BelezaRequestItems(
             params=Config.BELEZA_PARAMAS.value,
-            product=product, source=self.source, ).request_itens()
+            product=product, source=self.source, ).request_items()
         return self.request_product(requests)
 
-    def request_product(self, requests: list) -> Response:
+    def request_product(self, requests: list) -> list:
         responses = []
         with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
             process = [(executor.submit(Request(self.source + request).request)) for request in requests]
@@ -40,9 +40,7 @@ class BelezaNaWebSpyder(Spyder):
 
                 logger.info('The page was not find', extra={
                     'mdc': {'status_code': e.status_code, 'url': e.url}})
-                # yield
                 continue
             if response.ok:
                 responses.append(response)
-                # yield response
         return responses

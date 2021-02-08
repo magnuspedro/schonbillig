@@ -26,7 +26,7 @@ class IkesakiSpyder(Spyder):
 
         for requests in IkesakiRequestItems(
                 params=Config.IKESAKI_PARAMS.value,
-                product=product, source=self.source, ).request_itens():
+                product=product, source=self.source, ).request_items():
             yield from self.request_product(requests)
 
     @staticmethod

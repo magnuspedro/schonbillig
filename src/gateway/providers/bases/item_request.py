@@ -10,7 +10,7 @@ class ItemRequest(metaclass=ABCMeta):
                 hasattr(subclass, 'get_list_url') and
                 callable(subclass.get_list_url) and
                 hasattr(subclass, 'request_itens') and
-                callable(subclass.request_itens) or
+                callable(subclass.request_items) or
                 NotImplemented)
 
     @abstractmethod
@@ -28,7 +28,7 @@ class ItemRequest(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def request_itens(self) -> list:
+    def request_items(self) -> list:
         """
         Request page intens and return.
         """

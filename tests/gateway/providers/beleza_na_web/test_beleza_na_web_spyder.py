@@ -1,38 +1,33 @@
-import unittest
-from unittest.mock import Mock, patch
-
+import pytest
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
-from src.gateway.providers.beleza.beleza_spyder import \
-    BelezaNaWebSpyder
 from src.entities.enum.product import Product
+from src.gateway.providers.beleza.beleza_spyder import \
+    BelezaSpyder
 
 
-class TestBelezaNaWebSpyder(unittest.TestCase):
+def test_product_not_found(mocker):
+    with pytest.raises(PageNotFoundException):
+        mocker.patch(
+            'src.gateway.providers.beleza.beleza_spyder.BelezaSpyder.start_request').side_effect = PageNotFoundException
+        BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)
 
-    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
-    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.Request.request')
-    def test_fail_product(self, mock_itens, mock_get):
-        mock_get.return_value = ['http://www.belezanaweb.com.br', 'url']
 
-        mock_itens.side_effect = PageNotFoundException()
-        response = next(BelezaNaWebSpyder().start_request(
-            Product.SHAMPOO_BELEZA))
-        self.assertIsNone(response)
+def test_without_product():
+    with pytest.raises(TypeError):
+        BelezaSpyder().start_request()
 
-    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.BelezaNaWebRequestItens.request_itens')
-    @patch('src.gateway.providers.beleza.beleza_na_web_spyder.Request.request')
-    def test_individual_product(self, mock_request, mock_get):
 
-        mock_get.return_value = ['http://www.belezanaweb.com.br', 'url']
+def test_individual_product(mocker):
+    url = '/wella-professionals-fusion-shampoo-50ml/'
+    mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
+    request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
+    request_moker.return_value.ok = True
+    assert len(BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)) == 1
 
-        mock_request.return_value = Mock()
-        mock_request.return_value.ok = True
-        mock_request.return_value.status_code = 200
-        mock_request.return_value.content = "content"
 
-        response = next(BelezaNaWebSpyder().start_request(
-            Product.SHAMPOO_BELEZA))
-
-        self.assertEqual(response.ok, True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response.content, str)
+def test_fail_individual_product(mocker, requests_mock):
+    url = '/wella-professionals-fusion-shampoo-50ml/'
+    mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
+    request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
+    request_moker.return_value.ok = False
+    assert len(BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)) == 0

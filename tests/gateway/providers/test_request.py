@@ -1,28 +1,19 @@
-from unittest.mock import patch
-from unittest import TestCase
 from src.gateway.providers.bases.request import Request
 from tenacity import RetryError
+import pytest
 
 
-class TestRequest(TestCase):
+def test_successful_request(requests_mock):
+    url = 'https://httpstat.us/200'
+    requests_mock.get(url, status_code=200)
+    request = Request(method='GET', url=url).request()
+    assert request.status_code == 200
 
-    @patch('src.gateway.providers.request.requests.request')
-    def test_request(self, mock_get):
-        mock_get.return_value.ok = True
-        mock_get.return_value.status_code = 200
 
-        response = Request('url').request()
-
-        self.assertIsNotNone(response, 'Request cannot be null')
-        self.assertEqual(response.ok, True, 'Request has to be successfull')
-        self.assertEqual(response.status_code, 200,
-                         'Request has to be successfull')
-
-    @patch('src.gateway.providers.request.requests.request')
-    def test_request_fail(self, mock_get):
-        request = Request('url')
+def test_fail_request(requests_mock):
+    with pytest.raises(RetryError):
+        url = 'https://httpstat.us/500'
+        requests_mock.get(url, status_code=500)
+        request = Request(method='GET', url=url)
         request.request.retry.wait = None
-        mock_get.return_value.ok = False
-        mock_get.return_value.status_code = 404
-
-        self.assertRaises(RetryError, request.request)
+        request.request()
