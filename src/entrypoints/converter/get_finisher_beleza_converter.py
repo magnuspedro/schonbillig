@@ -20,7 +20,7 @@ class GetFinisherBelezaConverter:
             response)
 
         return Finisher(
-            name=name,
+            name=name.replace('\n', '').split('-')[0].strip(),
             brand=finisher_specs.get(InfoLine.BRAND.value),
             brand_line=finisher_specs.get(InfoLine.LINE.value),
             vegan=False,

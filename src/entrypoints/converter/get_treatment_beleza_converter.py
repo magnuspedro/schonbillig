@@ -20,7 +20,7 @@ class GetTreatmentBelezaConverter:
             response)
 
         return Treatment(
-            name=name,
+            name=name.replace('\n', '').split('-')[0].strip(),
             brand=shampoo_specs.get(InfoLine.BRAND.value),
             brand_line=shampoo_specs.get(InfoLine.LINE.value),
             vegan=False,

@@ -17,7 +17,7 @@ class GetConditionerBelezaConverter:
             response)
 
         return Conditioner(
-            name=name,
+            name=name.replace('\n', '').split('-')[0].strip(),
             brand=conditioner_specs.get(InfoLine.BRAND.value),
             brand_line=conditioner_specs.get(InfoLine.LINE.value),
             vegan=False,
