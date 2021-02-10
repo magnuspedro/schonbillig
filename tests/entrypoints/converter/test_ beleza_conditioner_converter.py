@@ -1,9 +1,9 @@
-from src.entities.shampoo import Shampoo
-from src.entrypoints.converter.get_shampoo_beleza_converter import GetShampooBelezaConverter
+from src.entities.conditioner import Conditioner
+from src.entrypoints.converter.get_conditioner_beleza_conevert import GetConditionerBelezaConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
-def test_converter_shampoo(mocker):
+def test_converter_conditioner(mocker):
     html = BelezaProductFixture(name='Wella Professionals Fusion',
                                 price='555.059,90',
                                 brand='Wella Professionals',
@@ -15,12 +15,12 @@ def test_converter_shampoo(mocker):
                                 texture='Liquido')
     request = mocker.Mock()
     request.text = str(html)
-    request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shampoo-50ml/'
-    shampoo = GetShampooBelezaConverter().to_entity(request)
-    assert type(shampoo) == Shampoo
+    request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-conditioner-50ml/'
+    conditioner = GetConditionerBelezaConverter().to_entity(request)
+    assert type(conditioner) == Conditioner
 
 
-def test_converter_attributes_shampoo(mocker):
+def test_converter_attributes_conditioner(mocker):
     html = BelezaProductFixture(name='Wella Professionals Fusion',
                                 price='555.059,90',
                                 brand='Wella Professionals',
@@ -32,19 +32,19 @@ def test_converter_attributes_shampoo(mocker):
                                 texture='Liquido')
     request = mocker.Mock()
     request.text = str(html)
-    request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shampoo-50ml/'
-    shampoo = GetShampooBelezaConverter().to_entity(request)
-    assert shampoo.name == 'Wella Professionals Fusion'
-    assert shampoo.brand == 'Wella Professionals'
-    assert shampoo.brand_line == 'Fusion'
-    assert shampoo.price[0].price == 555059.90
-    assert shampoo.vegan == False
-    assert shampoo.size == '50ml'
-    assert shampoo.utility == 'Força e Resistência'
-    assert shampoo.size_unit == 'Miniatura'
-    assert shampoo.hair_type == 'Danificados'
-    assert shampoo.hair_shaft_condition == 'Quebradiços'
-    assert shampoo.url[0].string == 'https://www.belezanaweb.com.br/wella-professionals-fusion-shampoo-50ml/'
-    assert shampoo.url[0].source == 'belezanaweb'
-    assert shampoo.code[0].code == '52110'
-    assert shampoo.texture == 'Liquido'
+    request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-conditioner-50ml/'
+    conditioner = GetConditionerBelezaConverter().to_entity(request)
+    assert conditioner.name == 'Wella Professionals Fusion'
+    assert conditioner.brand == 'Wella Professionals'
+    assert conditioner.brand_line == 'Fusion'
+    assert conditioner.price[0].price == 555059.90
+    assert conditioner.vegan == False
+    assert conditioner.size == '50ml'
+    assert conditioner.utility == 'Força e Resistência'
+    assert conditioner.size_unit == 'Miniatura'
+    assert conditioner.hair_type == 'Danificados'
+    assert conditioner.hair_shaft_condition == 'Quebradiços'
+    assert conditioner.url[0].string == 'https://www.belezanaweb.com.br/wella-professionals-fusion-conditioner-50ml/'
+    assert conditioner.url[0].source == 'belezanaweb'
+    assert conditioner.code[0].code == '52110'
+    assert conditioner.texture == 'Liquido'

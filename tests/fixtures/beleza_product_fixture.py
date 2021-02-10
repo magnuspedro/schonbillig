@@ -1,6 +1,6 @@
-class BelezaShampooFixture:
+class BelezaProductFixture:
 
-    def __init__(self, name, price, brand, brand_line, hair_type, size_unit, utility, hair_shaft_condition):
+    def __init__(self, name, price, brand, brand_line, hair_type, size_unit, utility, hair_shaft_condition, texture):
         self.name = name
         self.price = price
         self.brand = brand
@@ -9,6 +9,7 @@ class BelezaShampooFixture:
         self.size_unit = size_unit
         self.utility = utility
         self.hair_shaft_condition = hair_shaft_condition
+        self.texture = texture
 
     def __str__(self):
         string = '''<h1 class="nproduct-title">
@@ -58,6 +59,12 @@ class BelezaShampooFixture:
                                     <span class="info-label">Desejo de Beleza</span>
                                                 <span class="info-value">
                                                     ''' + self.utility + '''
+                                                </span>
+                                </div>
+                                <div class="info-line">
+                                    <span class="info-label">Textura</span>
+                                                <span class="info-value">
+                                                    ''' + self.texture + '''
                                                 </span>
                                 </div>
                                 <div class="info-line">
