@@ -28,7 +28,8 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
         return name, size, info_label, sku, leave_specs, price
 
     def find_size(self, size):
-        if len(size) > 1:
+        print(size)
+        if len(size) >= 1:
             return size[0].replace('-', '')
         else:
             return None
