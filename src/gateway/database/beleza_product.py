@@ -1,6 +1,7 @@
 from dataclasses import asdict, dataclass
 
 from src.config.db import db
+from src.utils.utils import Utils
 
 
 class BelezaProduct:
@@ -8,6 +9,7 @@ class BelezaProduct:
     @staticmethod
     def insert_product(dataclass: dataclass, product_type: str):
         product_dict = asdict(dataclass)
+        product_dict = Utils.del_none(product_dict)
         find_query = {'code.code': product_dict['code'][0]['code']}
 
         product = db[product_type].find_one(find_query)
