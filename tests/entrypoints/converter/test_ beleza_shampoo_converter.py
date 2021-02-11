@@ -1,5 +1,5 @@
 from src.entities.shampoo import Shampoo
-from src.entrypoints.converter.get_shampoo_beleza_converter import GetShampooBelezaConverter
+from src.entrypoints.converter.beleza_get_shampoo_converter import BelezaGetShampooConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
@@ -16,7 +16,7 @@ def test_converter_shampoo(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shampoo-50ml/'
-    shampoo = GetShampooBelezaConverter().to_entity(request)
+    shampoo = BelezaGetShampooConverter().to_entity(request)
     assert type(shampoo) == Shampoo
 
 
@@ -33,12 +33,11 @@ def test_converter_attributes_shampoo(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shampoo-50ml/'
-    shampoo = GetShampooBelezaConverter().to_entity(request)
+    shampoo = BelezaGetShampooConverter().to_entity(request)
     assert shampoo.name == 'Wella Professionals Fusion'
     assert shampoo.brand == 'Wella Professionals'
     assert shampoo.brand_line == 'Fusion'
     assert shampoo.price[0].price == 555059.90
-    assert shampoo.vegan == False
     assert shampoo.size == '50ml'
     assert shampoo.utility == 'Força e Resistência'
     assert shampoo.size_unit == 'Miniatura'

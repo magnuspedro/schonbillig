@@ -1,5 +1,5 @@
 from src.entities.treatment import Treatment
-from src.entrypoints.converter.get_treatment_beleza_converter import GetTreatmentBelezaConverter
+from src.entrypoints.converter.beleza_get_treatment_converter import BelezaGetTreatmentConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
@@ -16,7 +16,7 @@ def test_converter_treatment(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-treatment-50ml/'
-    treatment = GetTreatmentBelezaConverter().to_entity(request)
+    treatment = BelezaGetTreatmentConverter().to_entity(request)
     assert type(treatment) == Treatment
 
 
@@ -33,12 +33,11 @@ def test_converter_attributes_treatment(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-treatment-50ml/'
-    treatment = GetTreatmentBelezaConverter().to_entity(request)
+    treatment = BelezaGetTreatmentConverter().to_entity(request)
     assert treatment.name == 'Wella Professionals Fusion'
     assert treatment.brand == 'Wella Professionals'
     assert treatment.brand_line == 'Fusion'
     assert treatment.price[0].price == 555059.90
-    assert treatment.vegan == False
     assert treatment.size == '50ml'
     assert treatment.utility == 'Força e Resistência'
     assert treatment.size_unit == 'Miniatura'

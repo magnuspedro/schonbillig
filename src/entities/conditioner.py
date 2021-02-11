@@ -13,7 +13,6 @@ class Conditioner:
     brand: str
     brand_line: str
     price: List[Price]
-    vegan: bool
     size: str
     utility: str
     size_unit: float

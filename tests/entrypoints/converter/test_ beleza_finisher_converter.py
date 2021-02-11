@@ -1,5 +1,5 @@
 from src.entities.finisher import Finisher
-from src.entrypoints.converter.get_finisher_beleza_converter import GetFinisherBelezaConverter
+from src.entrypoints.converter.beleza_get_finisher_converter import BelezaGetFinisherConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
@@ -16,7 +16,7 @@ def test_converter_finisher(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-finisher-50ml/'
-    finisher = GetFinisherBelezaConverter().to_entity(request)
+    finisher = BelezaGetFinisherConverter().to_entity(request)
     assert type(finisher) == Finisher
 
 
@@ -33,12 +33,11 @@ def test_converter_attributes_finisher(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-finisher-50ml/'
-    finisher = GetFinisherBelezaConverter().to_entity(request)
+    finisher = BelezaGetFinisherConverter().to_entity(request)
     assert finisher.name == 'Wella Professionals Fusion'
     assert finisher.brand == 'Wella Professionals'
     assert finisher.brand_line == 'Fusion'
     assert finisher.price[0].price == 555059.90
-    assert finisher.vegan == False
     assert finisher.size == '50ml'
     assert finisher.utility == 'Força e Resistência'
     assert finisher.size_unit == 'Miniatura'

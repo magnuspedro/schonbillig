@@ -8,12 +8,12 @@ from src.entities.finisher import Finisher
 from src.entities.price import Price
 from src.entities.url import Url
 from src.entities.enum.beleza_na_web_info_line import InfoLine
-from src.entrypoints.converter.abstract_converter import AbstractConverter
+from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
 logger = PTLogger(name=__name__)
 
 
-class GetFinisherBelezaConverter(AbstractConverter):
+class BelezaGetFinisherConverter(BelezaAbstractConverter):
     def to_entity(self, response: Response) -> Finisher:
         source = get_url(response.url).domain
 
@@ -24,7 +24,6 @@ class GetFinisherBelezaConverter(AbstractConverter):
             name=name.replace('\n', '').split('-')[0].strip(),
             brand=self.clear(finisher_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(finisher_specs.get(InfoLine.LINE.value)),
-            vegan=False,
             size=size,
             texture=self.clear(finisher_specs.get(InfoLine.TEXTURE.value)) or None,
             price=[

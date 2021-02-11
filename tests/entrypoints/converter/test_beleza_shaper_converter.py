@@ -1,5 +1,5 @@
 from src.entities.shaper import Shaper
-from src.entrypoints.converter.get_shaper_beleza_converter import GetShaperBelezaConverter
+from src.entrypoints.converter.beleza_get_shaper_converter import BelezaGetShaperConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
@@ -16,7 +16,7 @@ def test_converter_shaper(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shaper-50ml/'
-    shaper = GetShaperBelezaConverter().to_entity(request)
+    shaper = BelezaGetShaperConverter().to_entity(request)
     assert type(shaper) == Shaper
 
 
@@ -33,12 +33,11 @@ def test_converter_attributes_shaper(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-shaper-50ml/'
-    shaper = GetShaperBelezaConverter().to_entity(request)
+    shaper = BelezaGetShaperConverter().to_entity(request)
     assert shaper.name == 'Wella Professionals Fusion'
     assert shaper.brand == 'Wella Professionals'
     assert shaper.brand_line == 'Fusion'
     assert shaper.price[0].price == 555059.90
-    assert shaper.vegan == False
     assert shaper.size == '50ml'
     assert shaper.utility == 'Força e Resistência'
     assert shaper.size_unit == 'Miniatura'

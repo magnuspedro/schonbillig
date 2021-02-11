@@ -1,10 +1,11 @@
+import re
 from abc import ABCMeta, abstractmethod
 
 from bs4 import BeautifulSoup
 from requests import Response
 
 
-class AbstractConverter(metaclass=ABCMeta):
+class BelezaAbstractConverter(metaclass=ABCMeta):
     @abstractmethod
     def to_entity(self):
         raise NotImplemented
@@ -14,7 +15,7 @@ class AbstractConverter(metaclass=ABCMeta):
 
         name = soup.select(
             '.nproduct-title')[0].text.strip()
-        size = response.url.split('-')[-1].strip('/')
+        size = re.findall('[0-9]+-*ml', response.url)[0].replace('-', '')
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         leave_specs = self.specs(info_label)
@@ -39,6 +40,8 @@ class AbstractConverter(metaclass=ABCMeta):
     def clear(self, array):
         if array is None:
             return None
-        elif len(array) > 1:
+        elif len(array) > 1 and isinstance(array, list):
+            return array
+        elif isinstance(array, str):
             return array
         return array[0]

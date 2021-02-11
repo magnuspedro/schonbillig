@@ -1,5 +1,5 @@
 from src.entities.leave import Leave
-from src.entrypoints.converter.get_leave_beleza_converter import GetLeaveBelezaConverter
+from src.entrypoints.converter.beleza_get_leave_converter import BelezaGetLeaveConverter
 from tests.fixtures.beleza_product_fixture import BelezaProductFixture
 
 
@@ -16,7 +16,7 @@ def test_converter_leave(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-leave-50ml/'
-    leave = GetLeaveBelezaConverter().to_entity(request)
+    leave = BelezaGetLeaveConverter().to_entity(request)
     assert type(leave) == Leave
 
 
@@ -33,12 +33,11 @@ def test_converter_attributes_leave(mocker):
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-leave-50ml/'
-    leave = GetLeaveBelezaConverter().to_entity(request)
+    leave = BelezaGetLeaveConverter().to_entity(request)
     assert leave.name == 'Wella Professionals Fusion'
     assert leave.brand == 'Wella Professionals'
     assert leave.brand_line == 'Fusion'
     assert leave.price[0].price == 555059.90
-    assert leave.vegan == False
     assert leave.size == '50ml'
     assert leave.utility == 'Força e Resistência'
     assert leave.size_unit == 'Miniatura'

@@ -6,10 +6,10 @@ from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entities.price import Price
 from src.entities.shaper import Shaper
 from src.entities.url import Url
-from src.entrypoints.converter.abstract_converter import AbstractConverter
+from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
 
-class GetShaperBelezaConverter(AbstractConverter):
+class BelezaGetShaperConverter(BelezaAbstractConverter):
     def to_entity(self, response: Response) -> Shaper:
         source = get_url(response.url).domain
 
@@ -20,7 +20,6 @@ class GetShaperBelezaConverter(AbstractConverter):
             name=name.replace('\n', '').split('-')[0].strip(),
             brand=self.clear(shapper_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(shapper_specs.get(InfoLine.LINE.value)),
-            vegan=False,
             size=size,
             texture=self.clear(shapper_specs.get(InfoLine.TEXTURE.value)) or None,
             price=[

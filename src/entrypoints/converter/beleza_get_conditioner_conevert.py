@@ -7,10 +7,10 @@ from src.entities.conditioner import Conditioner
 from src.entities.price import Price
 from src.entities.url import Url
 from src.entities.enum.beleza_na_web_info_line import InfoLine
-from src.entrypoints.converter.abstract_converter import AbstractConverter
+from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
 
-class GetConditionerBelezaConverter(AbstractConverter):
+class BelezaGetConditionerConverter(BelezaAbstractConverter):
     def to_entity(self, response: Response) -> Conditioner:
         source = get_url(response.url).domain
 
@@ -21,7 +21,6 @@ class GetConditionerBelezaConverter(AbstractConverter):
             name=name.replace('\n', '').split('-')[0].strip(),
             brand=self.clear(conditioner_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(conditioner_specs.get(InfoLine.LINE.value)),
-            vegan=False,
             size=size,
             texture=self.clear(conditioner_specs.get(InfoLine.TEXTURE.value)) or None,
             price=[

@@ -1,24 +1,24 @@
 from enum import Enum
 
-from src.gateway.providers.beleza.products.conditioner.conditioner_beleza_converter_strategy import \
-    ConditionerBelezaConverterStrategy
-from src.gateway.providers.beleza.products.finisher.finisher_beleza_converter_strategy import \
-    FinisherBelezaConverterStrategy
-from src.gateway.providers.beleza.products.leave.leave_beleza_converter_strategy import LeaveBelezaConverterStrategy
-from src.gateway.providers.beleza.products.shampoo.shampoo_beleza_converter_strategy import \
-    ShampooBelezaConverterStrategy
-from src.gateway.providers.beleza.products.shaper.shaper_beleza_converter_strategy import ShaperBelezaConverterStrategy
-from src.gateway.providers.beleza.products.treatment.treatment_beleza_converter_strategy import \
-    TreatmentBelezaConverterStrategy
+from src.gateway.providers.beleza.products.conditioner.beleza_conditioner_converter_strategy import \
+    BelezaConditionerConverterStrategy
+from src.gateway.providers.beleza.products.finisher.beleza_finisher_converter_strategy import \
+    BelezaFinisherConverterStrategy
+from src.gateway.providers.beleza.products.leave.beleza_leave_converter_strategy import BelezaLeaveConverterStrategy
+from src.gateway.providers.beleza.products.shampoo.beleza_shampoo_converter_strategy import \
+    BelezaShampooConverterStrategy
+from src.gateway.providers.beleza.products.shaper.beleza_shaper_converter_strategy import BelezaShaperConverterStrategy
+from src.gateway.providers.beleza.products.treatment.beleza_treatment_converter_strategy import \
+    BelezaTreatmentConverterStrategy
 from src.gateway.providers.ikesaki.products.shampoo.shampoo_ikesak_converteri_strategy import \
     ShampooIkesakiConverterStrategy
 
 
 class Converter(Enum):
-    SHAMPOO_BELEZA = ShampooBelezaConverterStrategy
-    CONDITIONER_BELEZA = ConditionerBelezaConverterStrategy
-    TREATMENT_BELEZA = TreatmentBelezaConverterStrategy
-    FINISHER_BELEZA = FinisherBelezaConverterStrategy
-    LEAVE_BELEZA = LeaveBelezaConverterStrategy
-    SHAPER_BELEZA = ShaperBelezaConverterStrategy
+    SHAMPOO_BELEZA = BelezaShampooConverterStrategy
+    CONDITIONER_BELEZA = BelezaConditionerConverterStrategy
+    TREATMENT_BELEZA = BelezaTreatmentConverterStrategy
+    FINISHER_BELEZA = BelezaFinisherConverterStrategy
+    LEAVE_BELEZA = BelezaLeaveConverterStrategy
+    SHAPER_BELEZA = BelezaShaperConverterStrategy
     SHAMPOO_IKESAKI = ShampooIkesakiConverterStrategy

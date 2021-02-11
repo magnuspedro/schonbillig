@@ -8,12 +8,12 @@ from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entities.price import Price
 from src.entities.shampoo import Shampoo
 from src.entities.url import Url
-from src.entrypoints.converter.abstract_converter import AbstractConverter
+from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
 logger = PTLogger(name=__name__)
 
 
-class GetShampooBelezaConverter(AbstractConverter):
+class BelezaGetShampooConverter(BelezaAbstractConverter):
     def to_entity(self, response: Response) -> Shampoo:
         source = get_url(response.url).domain
 
@@ -24,7 +24,6 @@ class GetShampooBelezaConverter(AbstractConverter):
             name=name.replace('\n', '').split('-')[0].strip(),
             brand=self.clear(shampoo_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(shampoo_specs.get(InfoLine.LINE.value)),
-            vegan=False,
             size=size,
             texture=self.clear(shampoo_specs.get(InfoLine.TEXTURE.value)) or None,
             price=[
