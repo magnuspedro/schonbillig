@@ -1,6 +1,6 @@
 import pytest
 from src.config.exceptions.page_not_found_exception import PageNotFoundException
-from src.entities.enum.product import Product
+from src.entities.enum.products_strategy import ProductsStrategy
 from src.gateway.providers.beleza.beleza_spyder import \
     BelezaSpyder
 
@@ -9,7 +9,7 @@ def test_product_not_found(mocker):
     with pytest.raises(PageNotFoundException):
         mocker.patch(
             'src.gateway.providers.beleza.beleza_spyder.BelezaSpyder.start_request').side_effect = PageNotFoundException
-        BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)
+        BelezaSpyder().start_request(ProductsStrategy.SHAMPOO_BELEZA)
 
 
 def test_without_product():
@@ -22,7 +22,7 @@ def test_individual_product(mocker):
     mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
     request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
     request_moker.return_value.ok = True
-    assert len(BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)) == 1
+    assert len(BelezaSpyder().start_request(ProductsStrategy.SHAMPOO_BELEZA)) == 1
 
 
 def test_fail_individual_product(mocker, requests_mock):
@@ -30,4 +30,4 @@ def test_fail_individual_product(mocker, requests_mock):
     mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
     request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
     request_moker.return_value.ok = False
-    assert len(BelezaSpyder().start_request(Product.SHAMPOO_BELEZA)) == 0
+    assert len(BelezaSpyder().start_request(ProductsStrategy.SHAMPOO_BELEZA)) == 0

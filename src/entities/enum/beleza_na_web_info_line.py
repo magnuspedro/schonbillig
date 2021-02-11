@@ -11,3 +11,4 @@ class InfoLine(Enum):
     BRAND = 'Marca'
     LINE = 'Linha'
     TEXTURE = 'Textura'
+    PRODUCTS_FOR = 'Produtos para'

@@ -91,6 +91,19 @@ class BelezaProductFixture:
                                     </a>
                                 </strong>
                             </div>
+                            <div class="info-line">
+                                <span class="info-label">Produtos para</span>                                        
+                                            <strong class="info-link">
+                                                <a href="/cabelos/leave-in-e-creme-para-pentear/normais-e-todos-os-tipos?produtos-para=maciez-e-desembaraco" data-interaction="{&quot;category&quot;: &quot;PRODUCTS&quot;, &quot;action&quot;: &quot;Link-Click&quot;, &quot;label&quot;: &quot;datasheet attribute&quot;,  &quot;values&quot;: &quot;attribute;/cabelos/leave-in-e-creme-para-pentear/normais-e-todos-os-tipos?produtos-para=maciez-e-desembaraco&quot;}">
+                                                    Maciez e Desembaraço
+                                                </a>
+                                            </strong>
+                                            <strong class="info-link">
+                                                <a href="/cabelos/leave-in-e-creme-para-pentear/normais-e-todos-os-tipos?produtos-para=reparacao-de-danos" data-interaction="{&quot;category&quot;: &quot;PRODUCTS&quot;, &quot;action&quot;: &quot;Link-Click&quot;, &quot;label&quot;: &quot;datasheet attribute&quot;,  &quot;values&quot;: &quot;attribute;/cabelos/leave-in-e-creme-para-pentear/normais-e-todos-os-tipos?produtos-para=reparacao-de-danos&quot;}">
+                                                    Reparação de Danos
+                                                </a>
+                                            </strong>
+                            </div>
                     </div>
                 </div>
             </div>

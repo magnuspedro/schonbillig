@@ -5,3 +5,4 @@ class Products(Enum):
     CONDITIONER = 'conditioner'
     FINISHER = 'finisher'
     TREATMENT = 'treatment'
+    LEAVE = 'leave'

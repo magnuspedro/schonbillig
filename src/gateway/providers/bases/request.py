@@ -34,14 +34,18 @@ class Request:
     def request(self) -> requests.Response:
         logger.info('[Requests] Starting request')
         response = requests.request(
-            self.method, self.url, headers=self.headers, cookies=self.cookies)
+            self.method, self.url, headers=self.headers, cookies=self.cookies, timeout=Config.TIMEOUT.value, proxies=Config.PROXY.value)
+
+        if response.status_code != 200:
+            logger.error(f'[{response.status_code}] --> Status Code',
+                         extra={'mdc': {'status_code': response.status_code,
+                                       'url': self.url}})
+            raise PageNotFoundException(
+                url=response.url, status_code=response.status_code)
+
         logger.info(f'[{response.status_code}] --> Status Code',
                     extra={'mdc': {'status_code': response.status_code,
                                    'url': self.url}})
-
-        if response.status_code != 200:
-            raise PageNotFoundException(
-                url=response.url, status_code=response.status_code)
 
         logger.debug('Setting response body')
 

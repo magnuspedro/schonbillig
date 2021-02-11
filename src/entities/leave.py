@@ -22,4 +22,6 @@ class Leave:
     url: List[Url]
     code: List[Code]
     texture: Optional[str]
+    products_for: List[str]
+    properties: Optional[List[str]]
     create_at: datetime = field(default_factory=datetime.now)

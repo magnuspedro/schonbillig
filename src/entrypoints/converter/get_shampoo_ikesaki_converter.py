@@ -21,7 +21,6 @@ class GetShampooIkesakiConverter:
             name=name,
             brand=brand,
             brand_line=None,
-            vegan=False,
             size=size,
             price=[
                 Price(**{'price': float(price), 'source': source})],

@@ -15,13 +15,13 @@ from src.gateway.providers.provider_selector import ProviderSelector
 logger = PTLogger(name=__name__)
 
 
-class GetFinisher:
+class GetLeave:
 
     @staticmethod
     def execute():
-        converter = ConverterSelector(Converter.FINISHER_BELEZA.value)
+        converter = ConverterSelector(Converter.LEAVE_BELEZA.value)
         products = ProviderSelector(
-            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.FINISHER_BELEZA)
+            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.LEAVE_BELEZA)
         logger.info(f'Number of Products {len(products)}')
         try:
             pool = Pool()
@@ -32,9 +32,8 @@ class GetFinisher:
             pool.join()
         with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
             process = [executor.submit(
-                BelezaProduct.insert_product, product, Products.FINISHER.value) for product in products]
+                BelezaProduct.insert_product, product, Products.LEAVE.value) for product in products]
         logger.info('Sending product to database')
         for task in process:
             task.result()
-
 

@@ -8,7 +8,7 @@ from src.gateway.database.beleza_product import BelezaProduct
 from src.entities.enum.converter import Converter
 from src.gateway.providers.converter_selector import \
     ConverterSelector
-from src.entities.enum.product import Product
+from src.entities.enum.products_strategy import ProductsStrategy
 from src.entities.enum.provider import Provider
 from src.gateway.providers.provider_selector import ProviderSelector
 
@@ -21,7 +21,7 @@ class GetTreatment:
     def execute():
         converter = ConverterSelector(Converter.TREATMENT_BELEZA.value)
         products = ProviderSelector(
-            Provider.BELEZA_NA_WEB.value).parse(Product.TREATMENT_BELEZA)
+            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.TREATMENT_BELEZA)
         logger.info(f'Number of Products {len(products)}')
         try:
             pool = Pool()

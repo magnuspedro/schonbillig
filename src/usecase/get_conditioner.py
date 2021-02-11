@@ -4,7 +4,7 @@ from multiprocessing import Pool
 from src.config.config import Config
 from src.config.logger.logging_module import PTLogger
 from src.entities.enum.converter import Converter
-from src.entities.enum.product import Product
+from src.entities.enum.products_strategy import ProductsStrategy
 from src.entities.enum.products import Products
 from src.entities.enum.provider import Provider
 from src.gateway.database.beleza_product import BelezaProduct
@@ -21,7 +21,7 @@ class GetConditioner:
     def execute():
         converter = ConverterSelector(Converter.CONDITIONER_BELEZA.value)
         products = ProviderSelector(
-            Provider.BELEZA_NA_WEB.value).parse(Product.CONDITIONER_BELEZA)
+            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.CONDITIONER_BELEZA)
         logger.info(f'Number of Products {len(products)}')
         try:
             pool = Pool()
