@@ -16,7 +16,6 @@ logger = PTLogger(name=__name__)
 
 
 class GetShampoo:
-    @staticmethod
     def execute(self):
         # self.ikesaki()
         self.beleza_na_web()

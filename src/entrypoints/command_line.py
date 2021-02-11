@@ -17,7 +17,7 @@ def main():
     start = time.time()
     run_parallel_usecase(
         lambda: GetLeave.execute(),
-        lambda: GetShampoo.execute(),
+        lambda: GetShampoo().execute(),
         lambda: GetConditioner.execute(),
         lambda: GetFinisher.execute(),
         lambda: GetTreatment.execute(),
