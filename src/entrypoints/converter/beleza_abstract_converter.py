@@ -15,7 +15,7 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
 
         name = soup.select(
             '.nproduct-title')[0].text.strip()
-        size = re.findall('[0-9]+-*ml', response.url)[0].replace('-', '')
+        size = self.find_size(re.findall('[0-9]+-*ml', response.url))
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         leave_specs = self.specs(info_label)
@@ -26,6 +26,13 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
         else:
             price = 'nan'
         return name, size, info_label, sku, leave_specs, price
+
+    def find_size(self, size):
+        if len(size) > 1:
+            return size[0].replace('-', '')
+        else:
+            return None
+
 
     def specs(self, info_label: str) -> dict:
         leave_specs = {}

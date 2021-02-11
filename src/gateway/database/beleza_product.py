@@ -7,14 +7,13 @@ from src.utils.utils import Utils
 class BelezaProduct:
 
     @staticmethod
-    def insert_product(dataclass: dataclass, product_type: str):
-        product_dict = asdict(dataclass)
-        product_dict = Utils.del_none(product_dict)
+    def insert_product(product_dataclass: dataclass, product_type: str):
+        product_dict = Utils.del_none(asdict(product_dataclass))
         find_query = {'code.code': product_dict['code'][0]['code']}
 
         product = db[product_type].find_one(find_query)
         if not product:
-            db[product_type].insert_one(asdict(dataclass))
+            db[product_type].insert_one(product_dict)
         else:
             db[product_type].update_one(find_query,
                                         {'$push':
