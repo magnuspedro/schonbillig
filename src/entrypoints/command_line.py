@@ -1,11 +1,7 @@
 import time
 from concurrent.futures import ThreadPoolExecutor
 
-from src.usecase.get_conditioner import GetConditioner
-from src.usecase.get_finisher import GetFinisher
-from src.usecase.get_leave import GetLeave
-from src.usecase.get_shampoo import GetShampoo
-from src.usecase.get_treatment import GetTreatment
+from src.usecase.get_shaper import GetShaper
 
 
 def main():
@@ -15,11 +11,12 @@ def main():
     # GetTreatment.execute()
     start = time.time()
     run_parallel_usecase(
-        lambda: GetLeave().execute(),
-        lambda: GetShampoo().execute(),
-        lambda: GetConditioner.execute(),
-        lambda: GetFinisher.execute(),
-        lambda: GetTreatment.execute()
+    #     lambda: GetLeave.execute(),
+    #     lambda: GetShampoo.execute(),
+    #     lambda: GetConditioner.execute(),
+    #     lambda: GetFinisher.execute(),
+    #     lambda: GetTreatment.execute(),
+        lambda: GetShaper.execute(),
     )
     end = time.time()
     print(end - start)

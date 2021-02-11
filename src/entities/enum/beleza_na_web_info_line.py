@@ -12,3 +12,4 @@ class InfoLine(Enum):
     LINE = 'Linha'
     TEXTURE = 'Textura'
     PRODUCTS_FOR = 'Produtos para'
+    CONTROL = 'Controle'

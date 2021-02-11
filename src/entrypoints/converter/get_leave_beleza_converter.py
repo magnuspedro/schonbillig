@@ -34,6 +34,8 @@ class GetLeaveBelezaConverter(AbstractConverter):
                 InfoLine.HAIR_SHAFT_CONDITION.value)),
             properties=self.clear(leave_specs.get(
                 InfoLine.PROPRIETIES.value)),
+            control=self.clear(leave_specs.get(
+                InfoLine.CONTROL.value)),
             products_for=self.clear(leave_specs.get(InfoLine.PRODUCTS_FOR.value)),
             url=[Url(**{'string': response.url, 'source': source})],
 

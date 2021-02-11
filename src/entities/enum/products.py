@@ -6,3 +6,4 @@ class Products(Enum):
     FINISHER = 'finisher'
     TREATMENT = 'treatment'
     LEAVE = 'leave'
+    SHAPER = 'shaper'

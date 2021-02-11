@@ -34,6 +34,8 @@ class GetConditionerBelezaConverter(AbstractConverter):
                 InfoLine.HAIR_SHAFT_CONDITION.value)),
             properties=self.clear(conditioner_specs.get(
                 InfoLine.PROPRIETIES.value)),
+            control=self.clear(conditioner_specs.get(
+                InfoLine.CONTROL.value)),
             url=[Url(**{'string': response.url, 'source': source})],
             code=[Code(**{'code': sku, 'source': source})]
         )

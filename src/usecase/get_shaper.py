@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures.thread import ThreadPoolExecutor
 from multiprocessing import Pool
 
 from src.config.config import Config
@@ -15,16 +15,13 @@ from src.gateway.providers.provider_selector import ProviderSelector
 logger = PTLogger(name=__name__)
 
 
-class GetShampoo:
-    @staticmethod
-    def execute(self):
-        # self.ikesaki()
-        self.beleza_na_web()
+class GetShaper:
 
-    def beleza_na_web(self):
-        converter = ConverterSelector(Converter.SHAMPOO_BELEZA.value)
+    @staticmethod
+    def execute():
+        converter = ConverterSelector(Converter.SHAPER_BELEZA.value)
         products = ProviderSelector(
-            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.SHAMPOO_BELEZA)
+            Provider.BELEZA_NA_WEB.value).parse(ProductsStrategy.SHAPER_BELEZA)
         logger.info(f'Number of Products {len(products)}')
         try:
             pool = Pool()
@@ -35,7 +32,8 @@ class GetShampoo:
             pool.join()
         with ThreadPoolExecutor(max_workers=Config.REQUEST_MAX_WORKERS.value) as executor:
             process = [executor.submit(
-                BelezaProduct.insert_product, product, Products.SHAMPOO.value) for product in products]
+                BelezaProduct.insert_product, product, Products.SHAPER.value) for product in products]
         logger.info('Sending product to database')
         for task in process:
             task.result()
+

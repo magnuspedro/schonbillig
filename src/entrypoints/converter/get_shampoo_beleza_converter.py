@@ -37,6 +37,8 @@ class GetShampooBelezaConverter(AbstractConverter):
                 InfoLine.HAIR_SHAFT_CONDITION.value)),
             properties=self.clear(shampoo_specs.get(
                 InfoLine.PROPRIETIES.value)),
+            control=self.clear(shampoo_specs.get(
+                InfoLine.CONTROL.value)),
             url=[Url(**{'string': response.url, 'source': source})],
             code=[Code(**{'code': sku, 'source': source})]
         )

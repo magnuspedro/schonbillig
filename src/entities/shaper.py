@@ -8,7 +8,7 @@ from .url import Url
 
 
 @dataclass
-class Treatment:
+class Shaper:
     name: str
     brand: str
     brand_line: str
@@ -22,6 +22,7 @@ class Treatment:
     url: List[Url]
     code: List[Code]
     texture: Optional[str]
+    products_for: List[str]
     properties: Optional[List[str]]
     control: Optional[str]
     create_at: datetime = field(default_factory=datetime.now)
