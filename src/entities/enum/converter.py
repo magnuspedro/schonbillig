@@ -5,6 +5,8 @@ from src.gateway.providers.beleza.products.conditioner.beleza_conditioner_conver
 from src.gateway.providers.beleza.products.finisher.beleza_finisher_converter_strategy import \
     BelezaFinisherConverterStrategy
 from src.gateway.providers.beleza.products.leave.beleza_leave_converter_strategy import BelezaLeaveConverterStrategy
+from src.gateway.providers.beleza.products.permanent.beleza_permanent_converter_strategy import \
+    BelezaPermanentConverterStrategy
 from src.gateway.providers.beleza.products.shampoo.beleza_shampoo_converter_strategy import \
     BelezaShampooConverterStrategy
 from src.gateway.providers.beleza.products.shaper.beleza_shaper_converter_strategy import BelezaShaperConverterStrategy
@@ -21,4 +23,5 @@ class Converter(Enum):
     FINISHER_BELEZA = BelezaFinisherConverterStrategy
     LEAVE_BELEZA = BelezaLeaveConverterStrategy
     SHAPER_BELEZA = BelezaShaperConverterStrategy
+    PERMANENT_BELEZA = BelezaPermanentConverterStrategy
     SHAMPOO_IKESAKI = ShampooIkesakiConverterStrategy

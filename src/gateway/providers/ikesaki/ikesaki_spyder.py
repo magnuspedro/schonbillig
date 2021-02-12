@@ -10,8 +10,8 @@ from src.gateway.providers.ikesaki.ikesaki_request_items import \
     IkesakiRequestItems
 from src.gateway.providers.ikesaki.products.product_selector import \
     ProductSelector
-from src.gateway.providers.bases.request import Request
-from src.gateway.providers.bases.spyder import Spyder
+from src.gateway.bases.request import Request
+from src.gateway.bases.spyder import Spyder
 
 logger = PTLogger(name=__name__)
 

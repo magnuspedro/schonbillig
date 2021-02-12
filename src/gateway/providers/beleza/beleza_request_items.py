@@ -1,11 +1,9 @@
 from bs4 import BeautifulSoup
 
-from src.config.exceptions.page_not_found_exception \
-    import PageNotFoundException
 from tenacity import RetryError
 from src.config.logger.logging_module import PTLogger
-from src.gateway.providers.bases.item_request import ItemRequest
-from src.gateway.providers.bases.request import Request
+from src.gateway.bases.item_request import ItemRequest
+from src.gateway.bases.request import Request
 
 logger = PTLogger(name=__name__)
 

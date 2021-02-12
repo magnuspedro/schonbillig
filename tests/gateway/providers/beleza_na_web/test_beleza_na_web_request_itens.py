@@ -19,7 +19,7 @@ def test_fail_request_items(mocker):
     source = 'https://www.belezanaweb.com.br/api/htmls/showcase?uri=/cabelos/'
     product = 'shampoo'
     params = '&size=36&pagina=1'
-    request_mocker = mocker.patch('src.gateway.providers.bases.request.Request.request')
+    request_mocker = mocker.patch('src.gateway.bases.request.Request.request')
     request_mocker.side_effect = RetryError(last_attempt=10)
     assert len(BelezaRequestItems(source, params, product).request_items()) == 0
 

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Products(Enum):
     SHAMPOO = 'shampoo'
     CONDITIONER = 'conditioner'
@@ -7,3 +8,4 @@ class Products(Enum):
     TREATMENT = 'treatment'
     LEAVE = 'leave'
     SHAPER = 'shaper'
+    PERMANENT = 'permanent'

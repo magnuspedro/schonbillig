@@ -20,7 +20,7 @@ def test_without_product():
 def test_individual_product(mocker):
     url = '/wella-professionals-fusion-shampoo-50ml/'
     mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
-    request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
+    request_moker = mocker.patch('src.gateway.bases.request.Request.request')
     request_moker.return_value.ok = True
     assert len(BelezaSpyder().start_request(ProductsStrategy.SHAMPOO_BELEZA)) == 1
 
@@ -28,6 +28,6 @@ def test_individual_product(mocker):
 def test_fail_individual_product(mocker, requests_mock):
     url = '/wella-professionals-fusion-shampoo-50ml/'
     mocker.patch('src.gateway.providers.beleza.beleza_request_items.BelezaRequestItems.request_items', lambda x: [url])
-    request_moker = mocker.patch('src.gateway.providers.bases.request.Request.request')
+    request_moker = mocker.patch('src.gateway.bases.request.Request.request')
     request_moker.return_value.ok = False
     assert len(BelezaSpyder().start_request(ProductsStrategy.SHAMPOO_BELEZA)) == 0

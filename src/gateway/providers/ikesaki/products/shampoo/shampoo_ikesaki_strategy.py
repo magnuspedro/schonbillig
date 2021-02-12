@@ -1,5 +1,5 @@
 from src.config.config import Config
-from src.gateway.providers.bases.product_strategy import ProductStrategy
+from src.gateway.bases.product_strategy import ProductStrategy
 
 
 class ShampooIkesakiStrategy(ProductStrategy):

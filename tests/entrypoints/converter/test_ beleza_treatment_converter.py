@@ -29,7 +29,8 @@ def test_converter_attributes_treatment(mocker):
                                 size_unit='Miniatura',
                                 utility='Força e Resistência',
                                 hair_shaft_condition='Quebradiços',
-                                texture='Liquido')
+                                texture='Liquido',
+                                size=None)
     request = mocker.Mock()
     request.text = str(html)
     request.url = 'https://www.belezanaweb.com.br/wella-professionals-fusion-treatment/'

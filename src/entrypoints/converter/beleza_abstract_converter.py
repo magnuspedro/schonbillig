@@ -6,6 +6,8 @@ from requests import Response
 
 
 class BelezaAbstractConverter(metaclass=ABCMeta):
+    REGEX = r'([0-9]+)([- ]*)(ml|g|L|l|kg)'
+
     @abstractmethod
     def to_entity(self):
         raise NotImplemented
@@ -15,7 +17,7 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
 
         name = soup.select(
             '.nproduct-title')[0].text.strip()
-        size = self.find_size(re.findall('[0-9]+-*ml', response.url))
+        size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[0].text))  # self.find_size(re.findall(self.REGEX, response.url))
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         leave_specs = self.specs(info_label)
@@ -27,13 +29,11 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
             price = 'nan'
         return name, size, info_label, sku, leave_specs, price
 
-    def find_size(self, size):
-        print(size)
+    def clean_size(self, size) -> str:
         if len(size) >= 1:
-            return size[0].replace('-', '')
+            return ''.join(size[0]).replace('-', '')
         else:
             return None
-
 
     def specs(self, info_label: str) -> dict:
         leave_specs = {}

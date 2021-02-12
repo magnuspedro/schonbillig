@@ -1,4 +1,4 @@
-from src.gateway.providers.bases.request import Request
+from src.gateway.bases.request import Request
 from tenacity import RetryError
 import pytest
 

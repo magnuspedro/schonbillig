@@ -1,6 +1,7 @@
 class BelezaProductFixture:
 
-    def __init__(self, name, price, brand, brand_line, hair_type, size_unit, utility, hair_shaft_condition, texture):
+    def __init__(self, name, price, brand, brand_line, hair_type, size_unit, utility, hair_shaft_condition, texture,
+                 size=50):
         self.name = name
         self.price = price
         self.brand = brand
@@ -10,11 +11,12 @@ class BelezaProductFixture:
         self.utility = utility
         self.hair_shaft_condition = hair_shaft_condition
         self.texture = texture
+        self.size = size
 
     def __str__(self):
         string = '''<h1 class="nproduct-title">
                 ''' + self.name + '''
-                    <span class="product-subtitle">  - Shampoo 50ml</span>
+                    <span class="product-subtitle">  - Shampoo ''' + str(self.size) + '''ml</span>
             </h1>
         <div class="product-sku">
                     <strong>Cod: </strong>52110

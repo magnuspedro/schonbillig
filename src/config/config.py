@@ -14,7 +14,7 @@ class Config(Enum):
         'leave': '/api/htmls/showcase?uri=/cabelos/leave-in-e-creme-para-pentear',
         'finisher': '/api/htmls/showcase?uri=/cabelos/finalizador',
         'shaper': '/api/htmls/showcase?uri=/cabelos/modelador',
-        'EscovaProgressiva': '/api/htmls/showcase?uri=/cabelos/escova-progressiva',
+        'permanent': '/api/htmls/showcase?uri=/cabelos/escova-progressiva',
         'Acessorios': '/api/htmls/showcase?uri=/cabelos/acessorios',
         'Coloracao': '/api/htmls/showcase?uri=/cabelos/coloracao',
     }

@@ -1,15 +1,16 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from enum import Enum
 
+from tenacity import RetryError
+
 from src.config.config import Config
-from src.config.exceptions.page_not_found_exception import PageNotFoundException
 from src.config.logger.logging_module import PTLogger
+from src.gateway.bases.request import Request
+from src.gateway.bases.spyder import Spyder
 from src.gateway.providers.beleza.beleza_request_items import \
     BelezaRequestItems
 from src.gateway.providers.product_selector import \
     ProductSelector
-from src.gateway.providers.bases.request import Request
-from src.gateway.providers.bases.spyder import Spyder
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 logger = PTLogger(name=__name__)
 
@@ -34,10 +35,9 @@ class BelezaSpyder(Spyder):
         for task in as_completed(process):
             try:
                 response = task.result()
-            except PageNotFoundException as e:
-
-                logger.info('The page was not find', extra={
-                    'mdc': {'status_code': e.status_code, 'url': e.url}})
+            except RetryError as e:
+                logger.error('The page was not found', extra={
+                    'mdc': {'status_code': response.status_code, 'url': response.url}}) #Todo: Concertar esse log
                 continue
             if response.ok:
                 responses.append(response)
