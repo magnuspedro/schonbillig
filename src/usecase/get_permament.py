@@ -3,13 +3,13 @@ from multiprocessing import Pool
 
 from src.config.config import Config
 from src.config.logger.logging_module import PTLogger
-from src.entities.enum.products import Products
-from src.gateway.database.beleza_product import BelezaProduct
 from src.entities.enum.converter import Converter
-from src.gateway.providers.converter_selector import \
-    ConverterSelector
+from src.entities.enum.products import Products
 from src.entities.enum.products_strategy import ProductsStrategy
 from src.entities.enum.provider import Provider
+from src.gateway.database.beleza_product import BelezaProduct
+from src.gateway.providers.converter_selector import \
+    ConverterSelector
 from src.gateway.providers.provider_selector import ProviderSelector
 
 logger = PTLogger(name=__name__)
@@ -36,4 +36,3 @@ class GetPermanent:
         logger.info('Sending product to database')
         for task in process:
             task.result()
-

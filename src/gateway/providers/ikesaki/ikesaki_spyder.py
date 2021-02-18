@@ -6,12 +6,12 @@ from src.config.config import Config
 from src.config.exceptions.page_not_found_exception import \
     PageNotFoundException
 from src.config.logger.logging_module import PTLogger
+from src.gateway.bases.request import Request
+from src.gateway.bases.spyder import Spyder
 from src.gateway.providers.ikesaki.ikesaki_request_items import \
     IkesakiRequestItems
 from src.gateway.providers.ikesaki.products.product_selector import \
     ProductSelector
-from src.gateway.bases.request import Request
-from src.gateway.bases.spyder import Spyder
 
 logger = PTLogger(name=__name__)
 

@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from requests import Response
 from url_parser import get_url
 

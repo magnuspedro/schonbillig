@@ -14,7 +14,8 @@ class BelezaAbstractConverter(metaclass=ABCMeta):
 
     def get_elements(self, response: Response) -> list:
         soup = BeautifulSoup(response.text, features="lxml")
-        size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[0].text))  # self.find_size(re.findall(self.REGEX, response.url))
+        size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[
+            0].text))  # self.find_size(re.findall(self.REGEX, response.url))
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         specs = self.specs(info_label)

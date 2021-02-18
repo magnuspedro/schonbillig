@@ -1,5 +1,5 @@
-from src.gateway.providers.ikesaki.ikesaki_spyder import IkesakiSpyder
 from src.gateway.database.provider_strategy import ProviderStrategy
+from src.gateway.providers.ikesaki.ikesaki_spyder import IkesakiSpyder
 
 
 class IkesakiStrategy(ProviderStrategy):

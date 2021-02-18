@@ -1,13 +1,12 @@
-from bs4 import BeautifulSoup
 from requests import Response
 from url_parser import get_url
 
 from src.config.logger.logging_module import PTLogger
 from src.entities.code import Code
+from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entities.finisher import Finisher
 from src.entities.price import Price
 from src.entities.url import Url
-from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
 logger = PTLogger(name=__name__)

@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-
 from tenacity import RetryError
+
 from src.config.logger.logging_module import PTLogger
 from src.gateway.bases.item_request import ItemRequest
 from src.gateway.bases.request import Request
