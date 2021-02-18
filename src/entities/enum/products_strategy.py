@@ -2,6 +2,7 @@ from enum import Enum
 
 from src.gateway.providers.beleza.products.conditioner.beleza_conditioner_strategy \
     import BelezaConditionerStrategy
+from src.gateway.providers.beleza.products.dye.beleza_dye_strategy import BelezaDyeStrategy
 from src.gateway.providers.beleza.products.finisher.beleza_finisher_strategy \
     import BelezaFinisherStrategy
 from src.gateway.providers.beleza.products.leave.beleza_leave_strategy import BelezaLeaveStrategy
@@ -22,4 +23,5 @@ class ProductsStrategy(Enum):
     LEAVE_BELEZA = BelezaLeaveStrategy()
     SHAPER_BELEZA = BelezaShaperStrategy()
     PERMANENT_BELEZA = BelezaPermanentStrategy()
+    DYE_BELEZA = BelezaDyeStrategy()
     SHAMPOO_IKESAKI = ShampooIkesakiStrategy()

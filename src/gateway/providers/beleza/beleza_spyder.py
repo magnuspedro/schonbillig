@@ -36,8 +36,7 @@ class BelezaSpyder(Spyder):
             try:
                 response = task.result()
             except RetryError as e:
-                logger.error('The page was not found', extra={
-                    'mdc': {'status_code': response.status_code, 'url': response.url}}) #Todo: Concertar esse log
+                logger.error('The page was not found') #Todo: Concertar esse log
                 continue
             if response.ok:
                 responses.append(response)

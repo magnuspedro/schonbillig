@@ -16,7 +16,7 @@ class Config(Enum):
         'shaper': '/api/htmls/showcase?uri=/cabelos/modelador',
         'permanent': '/api/htmls/showcase?uri=/cabelos/escova-progressiva',
         'Acessorios': '/api/htmls/showcase?uri=/cabelos/acessorios',
-        'Coloracao': '/api/htmls/showcase?uri=/cabelos/coloracao',
+        'dye': '/api/htmls/showcase?uri=/cabelos/coloracao',
     }
     IKESAKI_BASE_URL = 'https://www.ikesaki.com.br'
     IKESAKI_PARAMS = '&PageNumber=1'

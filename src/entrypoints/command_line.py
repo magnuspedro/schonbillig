@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from src.config.logger.logging_module import PTLogger
 from src.usecase.get_conditioner import GetConditioner
+from src.usecase.get_dye import GetDye
 from src.usecase.get_finisher import GetFinisher
 from src.usecase.get_leave import GetLeave
 from src.usecase.get_permament import GetPermanent
@@ -27,6 +28,7 @@ def main():
         lambda: GetTreatment.execute(),
         lambda: GetShaper.execute(),
         lambda: GetPermanent.execute(),
+        lambda: GetDye.execute(),
     )
     end = time.time()
     logger.info(f'Execution Time: {(end - start) / 60}m')

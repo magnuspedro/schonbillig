@@ -2,6 +2,7 @@ from enum import Enum
 
 from src.gateway.providers.beleza.products.conditioner.beleza_conditioner_converter_strategy import \
     BelezaConditionerConverterStrategy
+from src.gateway.providers.beleza.products.dye.beleza_dye_converter_strategy import BelezaDyeConverterStrategy
 from src.gateway.providers.beleza.products.finisher.beleza_finisher_converter_strategy import \
     BelezaFinisherConverterStrategy
 from src.gateway.providers.beleza.products.leave.beleza_leave_converter_strategy import BelezaLeaveConverterStrategy
@@ -24,4 +25,5 @@ class Converter(Enum):
     LEAVE_BELEZA = BelezaLeaveConverterStrategy
     SHAPER_BELEZA = BelezaShaperConverterStrategy
     PERMANENT_BELEZA = BelezaPermanentConverterStrategy
+    DYE_BELEZA = BelezaDyeConverterStrategy
     SHAMPOO_IKESAKI = ShampooIkesakiConverterStrategy

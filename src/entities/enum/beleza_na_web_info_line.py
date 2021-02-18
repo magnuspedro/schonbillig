@@ -13,3 +13,7 @@ class InfoLine(Enum):
     TEXTURE = 'Textura'
     PRODUCTS_FOR = 'Produtos para'
     CONTROL = 'Controle'
+    COLOR = 'Cor Base'
+    VOLUME = 'Volumetria'
+    DYEING_TYPE = 'Tipo de coloração'
+    TONE = 'Tons'

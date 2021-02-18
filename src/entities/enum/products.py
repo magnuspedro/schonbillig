@@ -9,3 +9,4 @@ class Products(Enum):
     LEAVE = 'leave'
     SHAPER = 'shaper'
     PERMANENT = 'permanent'
+    DYE = 'dye'
