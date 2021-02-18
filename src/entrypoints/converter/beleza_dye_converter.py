@@ -66,7 +66,7 @@ class BelezaGetDyeConverter(BelezaAbstractConverter):
             price = 'nan'
         color_number = soup.select('.product-group-name')
         if color_number:
-            color_number = [0].text.strip()
+            color_number = color_number[0].text.strip()
         else:
             color_number = None
         return name, size, info_label, sku, dye_specs, price, color_number
