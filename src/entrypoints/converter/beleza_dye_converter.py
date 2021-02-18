@@ -5,9 +5,9 @@ from requests import Response
 from url_parser import get_url
 
 from src.entities.code import Code
+from src.entities.dye import Dye
 from src.entities.enum.beleza_na_web_info_line import InfoLine
 from src.entities.price import Price
-from src.entities.dye import Dye
 from src.entities.url import Url
 from src.entrypoints.converter.beleza_abstract_converter import BelezaAbstractConverter
 
@@ -53,7 +53,8 @@ class BelezaGetDyeConverter(BelezaAbstractConverter):
 
         name = soup.select(
             '.nproduct-title')[0].text.strip()
-        size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[0].text))  # self.find_size(re.findall(self.REGEX, response.url))
+        size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[
+            0].text))  # self.find_size(re.findall(self.REGEX, response.url))
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         dye_specs = self.specs(info_label)
@@ -63,5 +64,9 @@ class BelezaGetDyeConverter(BelezaAbstractConverter):
                 '$')[1].strip().replace('.', '').replace(',', '.')
         else:
             price = 'nan'
-        color_number=soup.select('.product-group-name')[0].text.strip()
+        color_number = soup.select('.product-group-name')
+        if color_number:
+            color_number = [0].text.strip()
+        else:
+            color_number = None
         return name, size, info_label, sku, dye_specs, price, color_number
