@@ -21,7 +21,7 @@ class BelezaGetFinisherConverter(BelezaAbstractConverter):
             response)
 
         return Finisher(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(finisher_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(finisher_specs.get(InfoLine.LINE.value)),
             size=size,

@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from requests import Response
 from url_parser import get_url
 
@@ -18,7 +17,7 @@ class BelezaGetConditionerConverter(BelezaAbstractConverter):
             response)
 
         return Conditioner(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(conditioner_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(conditioner_specs.get(InfoLine.LINE.value)),
             size=size,

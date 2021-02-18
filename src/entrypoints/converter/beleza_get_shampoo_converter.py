@@ -21,7 +21,7 @@ class BelezaGetShampooConverter(BelezaAbstractConverter):
             response)
 
         return Shampoo(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(shampoo_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(shampoo_specs.get(InfoLine.LINE.value)),
             size=size,

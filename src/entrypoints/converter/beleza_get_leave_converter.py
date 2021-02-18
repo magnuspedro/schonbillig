@@ -18,7 +18,7 @@ class BelezaGetLeaveConverter(BelezaAbstractConverter):
             response)
 
         return Leave(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(leave_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(leave_specs.get(InfoLine.LINE.value)),
             size=size,

@@ -21,7 +21,7 @@ class BelezaGetDyeConverter(BelezaAbstractConverter):
         name, size, info_label, sku, dye_specs, price, color_number = self.get_elements(
             response)
         return Dye(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(dye_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(dye_specs.get(InfoLine.LINE.value)),
             size=size,
@@ -50,15 +50,15 @@ class BelezaGetDyeConverter(BelezaAbstractConverter):
 
     def get_elements(self, response: Response) -> list:
         soup = BeautifulSoup(response.text, features="lxml")
-
-        name = soup.select(
-            '.nproduct-title')[0].text.strip()
         size = self.clean_size(re.findall(self.REGEX, soup.select('.nproduct-title')[
             0].text))  # self.find_size(re.findall(self.REGEX, response.url))
         sku = soup.select('.product-sku')[0].text.strip().split(':')[1].strip()
         info_label = soup.select('.info-line')
         dye_specs = self.specs(info_label)
         price = soup.select('.nproduct-price-value')
+        product_tag = soup.select('.nproduct-title')[0]
+        product_tag.span.decompose()
+        name = product_tag.text.strip()
         if price:
             price = price[0].text.strip().split(
                 '$')[1].strip().replace('.', '').replace(',', '.')

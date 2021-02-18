@@ -17,7 +17,7 @@ class BelezaGetPermanentConverter(BelezaAbstractConverter):
             response)
 
         return Permanent(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(permanent_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(permanent_specs.get(InfoLine.LINE.value)),
             size=size,

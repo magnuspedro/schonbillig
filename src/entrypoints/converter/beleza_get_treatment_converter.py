@@ -21,7 +21,7 @@ class BelezaGetTreatmentConverter(BelezaAbstractConverter):
             response)
 
         return Treatment(
-            name=name.replace('\n', '').split('-')[0].strip(),
+            name=name,
             brand=self.clear(treatment_specs.get(InfoLine.BRAND.value)),
             brand_line=self.clear(treatment_specs.get(InfoLine.LINE.value)),
             size=size,
